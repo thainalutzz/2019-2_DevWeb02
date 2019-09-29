@@ -1,0 +1,57 @@
+﻿@model IEnumerable<SiteHamburguer.Models.HAMBURGUER_INGREDIENTE>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.COD_HAMBURGUER_INGREDIENTE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.COD_HAMBURGUER_FK)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.COD_INGREDIENTE_FK)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QUANTIDADE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PRECO_TOTAL_HAM_ING)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.COD_HAMBURGUER_INGREDIENTE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.COD_HAMBURGUER_FK)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.COD_INGREDIENTE_FK)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QUANTIDADE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PRECO_TOTAL_HAM_ING)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.COD_HAMBURGUER_INGREDIENTE }) |
+            @Html.ActionLink("Details", "Details", new { id=item.COD_HAMBURGUER_INGREDIENTE }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.COD_HAMBURGUER_INGREDIENTE})
+        </td>
+    </tr>
+}
+
+</table>

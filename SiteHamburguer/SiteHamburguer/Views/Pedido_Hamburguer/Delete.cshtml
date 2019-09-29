@@ -1,0 +1,64 @@
+﻿@model SiteHamburguer.Models.PEDIDO_HAMBURGUER
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>PEDIDO_HAMBURGUER</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.COD_PEDIDO_HAMBURGUER)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.COD_PEDIDO_HAMBURGUER)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.COD_PEDIDO_FK)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.COD_PEDIDO_FK)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.COD_HAMBURGUER_FK)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.COD_HAMBURGUER_FK)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QUANTIDADE_PED_HAM)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QUANTIDADE_PED_HAM)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PRECO_TOTAL_PED_HAM)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PRECO_TOTAL_PED_HAM)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

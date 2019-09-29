@@ -1,0 +1,51 @@
+﻿@model IEnumerable<SiteHamburguer.Models.INGREDIENTE>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.COD_INGREDIENTE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DESCR_INGREDIENTE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TIPO_INGREDIENTE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PRECO_INGREDIENTE)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.COD_INGREDIENTE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DESCR_INGREDIENTE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TIPO_INGREDIENTE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PRECO_INGREDIENTE)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new {  id=item.COD_INGREDIENTE  }) |
+            @Html.ActionLink("Details", "Details", new { id=item.COD_INGREDIENTE }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.COD_INGREDIENTE })
+        </td>
+    </tr>
+}
+
+</table>

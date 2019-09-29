@@ -1,0 +1,58 @@
+﻿@model SiteHamburguer.Models.PEDIDO_HAMBURGUER
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PEDIDO_HAMBURGUER</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.COD_PEDIDO_HAMBURGUER)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.COD_PEDIDO_HAMBURGUER)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.COD_PEDIDO_FK)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.COD_PEDIDO_FK)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.COD_HAMBURGUER_FK)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.COD_HAMBURGUER_FK)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QUANTIDADE_PED_HAM)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QUANTIDADE_PED_HAM)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PRECO_TOTAL_PED_HAM)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PRECO_TOTAL_PED_HAM)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.COD_PEDIDO_HAMBURGUER}) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,73 @@
+﻿@using SiteHamburguer.Models;
+@model SiteHamburguer.Models.DBModels.InfoLogin
+
+<h2>Index</h2>
+<style>
+    #login-div {
+        position: absolute;
+        left: 40%;
+        top: 40%;
+        border: 1px solid #ccc;
+        padding: 10px 10px;
+    }
+
+    .field-validation-error {
+        color: red;
+    }
+</style>
+<body>
+    <div id="login-div">
+        @using (Html.BeginForm("Autorize", "LoginCozinheiro", FormMethod.Post))
+        {
+            <table>
+                <tr>
+                    <td></td>
+                    <td style="text-decoration:underline">Teste</td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.CLIENTE.TELEFONE)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.CLIENTE.TELEFONE)
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        @Html.ValidationMessageFor(model => model.COZINHEIRO.SENHA_COZ)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.COZINHEIRO.SENHA_COZ)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.COZINHEIRO.SENHA_COZ)
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        @Html.ValidationMessageFor(model => model.COZINHEIRO.SENHA_COZ)
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <label class="field-validation-error">@Html.DisplayFor(model => model.CLIENTE.LoginErroMessagem)</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="submit" name="name" value="Login" />
+                        <input type="reset" name="name" value="Clear" />
+                    </td>
+                </tr>
+            </table>
+        }
+    </div>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+</body>

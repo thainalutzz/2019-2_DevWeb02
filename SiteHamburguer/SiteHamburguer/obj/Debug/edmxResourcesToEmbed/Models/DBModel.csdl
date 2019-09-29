@@ -1,0 +1,247 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SiteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CLIENTE">
+    <Key>
+      <PropertyRef Name="COD_CLIENTE" />
+    </Key>
+    <Property Name="COD_CLIENTE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CPF" Type="Int32" Nullable="false" />
+    <Property Name="RG" Type="Int32" Nullable="false" />
+    <Property Name="TELEFONE" Type="Int32" Nullable="false" />
+    <Property Name="CIDADE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="BAIRRO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RUA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NUMERO" Type="Int32" Nullable="false" />
+    <Property Name="COMPLEMENTO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="COZINHEIRO" Relationship="Self.FK__CLIENTE_COZINHEIRO" FromRole="CLIENTE" ToRole="COZINHEIRO" />
+    <NavigationProperty Name="COMSUMIDOR" Relationship="Self.FK_CLIENTE_COMSUMIDOR" FromRole="CLIENTE" ToRole="COMSUMIDOR" />
+    <Property Name="NOME" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="false" />
+  </EntityType>
+  <EntityType Name="COMSUMIDOR">
+    <Key>
+      <PropertyRef Name="COD_CONSUMIDOR" />
+    </Key>
+    <Property Name="COD_CONSUMIDOR" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="COD_CLIENTE_FK" Type="Int32" Nullable="false" />
+    <Property Name="FORMA_PAGTO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="SENHA_CON" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="CLIENTE" Relationship="Self.FK_CLIENTE_COMSUMIDOR" FromRole="COMSUMIDOR" ToRole="CLIENTE" />
+    <NavigationProperty Name="PEDIDO" Relationship="Self.FK_PEDIDO_COMSUMIDOR" FromRole="COMSUMIDOR" ToRole="PEDIDO" />
+  </EntityType>
+  <EntityType Name="COZINHEIRO">
+    <Key>
+      <PropertyRef Name="COD_COZINHEIRO" />
+    </Key>
+    <Property Name="COD_COZINHEIRO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="COD_CLIENTE_FK" Type="Int32" Nullable="false" />
+    <Property Name="CERTIFICACAO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="SENHA_COZ" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="CLIENTE" Relationship="Self.FK__CLIENTE_COZINHEIRO" FromRole="COZINHEIRO" ToRole="CLIENTE" />
+    <NavigationProperty Name="PEDIDO" Relationship="Self.FK_PEDIDO_COZINHEIRO" FromRole="COZINHEIRO" ToRole="PEDIDO" />
+  </EntityType>
+  <EntityType Name="HAMBURGUER">
+    <Key>
+      <PropertyRef Name="COD_HAMBURGUER" />
+    </Key>
+    <Property Name="COD_HAMBURGUER" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PRECO_HAMBURGUER" Type="Double" Nullable="false" />
+    <NavigationProperty Name="HAMBURGUER_INGREDIENTE" Relationship="Self.FK_HAMBURGUER_INGREDIENTE_HAMBURGUER" FromRole="HAMBURGUER" ToRole="HAMBURGUER_INGREDIENTE" />
+    <NavigationProperty Name="PEDIDO_HAMBURGUER" Relationship="Self.FK_PEDIDO_HAMBURGUER_HAMBURGUER" FromRole="HAMBURGUER" ToRole="PEDIDO_HAMBURGUER" />
+  </EntityType>
+  <EntityType Name="HAMBURGUER_INGREDIENTE">
+    <Key>
+      <PropertyRef Name="COD_HAMBURGUER_INGREDIENTE" />
+    </Key>
+    <Property Name="COD_HAMBURGUER_INGREDIENTE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="COD_HAMBURGUER_FK" Type="Int32" Nullable="false" />
+    <Property Name="COD_INGREDIENTE_FK" Type="Int32" Nullable="false" />
+    <Property Name="QUANTIDADE" Type="Int32" Nullable="false" />
+    <Property Name="PRECO_TOTAL_HAM_ING" Type="Double" Nullable="false" />
+    <NavigationProperty Name="HAMBURGUER" Relationship="Self.FK_HAMBURGUER_INGREDIENTE_HAMBURGUER" FromRole="HAMBURGUER_INGREDIENTE" ToRole="HAMBURGUER" />
+    <NavigationProperty Name="INGREDIENTE" Relationship="Self.FK_INGREDIENTE_HAMBURGUER_INGREDIENTE" FromRole="HAMBURGUER_INGREDIENTE" ToRole="INGREDIENTE" />
+  </EntityType>
+  <EntityType Name="INGREDIENTE">
+    <Key>
+      <PropertyRef Name="COD_INGREDIENTE" />
+    </Key>
+    <Property Name="COD_INGREDIENTE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DESCR_INGREDIENTE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TIPO_INGREDIENTE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PRECO_INGREDIENTE" Type="Double" Nullable="false" />
+    <NavigationProperty Name="HAMBURGUER_INGREDIENTE" Relationship="Self.FK_INGREDIENTE_HAMBURGUER_INGREDIENTE" FromRole="INGREDIENTE" ToRole="HAMBURGUER_INGREDIENTE" />
+  </EntityType>
+  <EntityType Name="PEDIDO">
+    <Key>
+      <PropertyRef Name="COD_PEDIDO" />
+    </Key>
+    <Property Name="COD_PEDIDO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="COD_CONSUMIDOR_FK" Type="Int32" Nullable="false" />
+    <Property Name="COD_COZINHEIRO_FK" Type="Int32" Nullable="false" />
+    <Property Name="PRECO_PEDIDO" Type="Double" Nullable="false" />
+    <Property Name="STATUS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="COMSUMIDOR" Relationship="Self.FK_PEDIDO_COMSUMIDOR" FromRole="PEDIDO" ToRole="COMSUMIDOR" />
+    <NavigationProperty Name="COZINHEIRO" Relationship="Self.FK_PEDIDO_COZINHEIRO" FromRole="PEDIDO" ToRole="COZINHEIRO" />
+    <NavigationProperty Name="PEDIDO_HAMBURGUER" Relationship="Self.FK_PEDIDO_HAMBURGUER_PEDIDO" FromRole="PEDIDO" ToRole="PEDIDO_HAMBURGUER" />
+  </EntityType>
+  <EntityType Name="PEDIDO_HAMBURGUER">
+    <Key>
+      <PropertyRef Name="COD_PEDIDO_HAMBURGUER" />
+    </Key>
+    <Property Name="COD_PEDIDO_HAMBURGUER" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="COD_PEDIDO_FK" Type="Int32" Nullable="false" />
+    <Property Name="COD_HAMBURGUER_FK" Type="Int32" Nullable="false" />
+    <Property Name="QUANTIDADE_PED_HAM" Type="Int32" Nullable="false" />
+    <Property Name="PRECO_TOTAL_PED_HAM" Type="Double" Nullable="false" />
+    <NavigationProperty Name="HAMBURGUER" Relationship="Self.FK_PEDIDO_HAMBURGUER_HAMBURGUER" FromRole="PEDIDO_HAMBURGUER" ToRole="HAMBURGUER" />
+    <NavigationProperty Name="PEDIDO" Relationship="Self.FK_PEDIDO_HAMBURGUER_PEDIDO" FromRole="PEDIDO_HAMBURGUER" ToRole="PEDIDO" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK__CLIENTE_COZINHEIRO">
+    <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="1" />
+    <End Role="COZINHEIRO" Type="Self.COZINHEIRO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CLIENTE">
+        <PropertyRef Name="COD_CLIENTE" />
+      </Principal>
+      <Dependent Role="COZINHEIRO">
+        <PropertyRef Name="COD_CLIENTE_FK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CLIENTE_COMSUMIDOR">
+    <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="1" />
+    <End Role="COMSUMIDOR" Type="Self.COMSUMIDOR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CLIENTE">
+        <PropertyRef Name="COD_CLIENTE" />
+      </Principal>
+      <Dependent Role="COMSUMIDOR">
+        <PropertyRef Name="COD_CLIENTE_FK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PEDIDO_COMSUMIDOR">
+    <End Role="COMSUMIDOR" Type="Self.COMSUMIDOR" Multiplicity="1" />
+    <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="COMSUMIDOR">
+        <PropertyRef Name="COD_CONSUMIDOR" />
+      </Principal>
+      <Dependent Role="PEDIDO">
+        <PropertyRef Name="COD_CONSUMIDOR_FK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PEDIDO_COZINHEIRO">
+    <End Role="COZINHEIRO" Type="Self.COZINHEIRO" Multiplicity="1" />
+    <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="COZINHEIRO">
+        <PropertyRef Name="COD_COZINHEIRO" />
+      </Principal>
+      <Dependent Role="PEDIDO">
+        <PropertyRef Name="COD_COZINHEIRO_FK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HAMBURGUER_INGREDIENTE_HAMBURGUER">
+    <End Role="HAMBURGUER" Type="Self.HAMBURGUER" Multiplicity="1" />
+    <End Role="HAMBURGUER_INGREDIENTE" Type="Self.HAMBURGUER_INGREDIENTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HAMBURGUER">
+        <PropertyRef Name="COD_HAMBURGUER" />
+      </Principal>
+      <Dependent Role="HAMBURGUER_INGREDIENTE">
+        <PropertyRef Name="COD_HAMBURGUER_FK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PEDIDO_HAMBURGUER_HAMBURGUER">
+    <End Role="HAMBURGUER" Type="Self.HAMBURGUER" Multiplicity="1" />
+    <End Role="PEDIDO_HAMBURGUER" Type="Self.PEDIDO_HAMBURGUER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HAMBURGUER">
+        <PropertyRef Name="COD_HAMBURGUER" />
+      </Principal>
+      <Dependent Role="PEDIDO_HAMBURGUER">
+        <PropertyRef Name="COD_HAMBURGUER_FK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_INGREDIENTE_HAMBURGUER_INGREDIENTE">
+    <End Role="INGREDIENTE" Type="Self.INGREDIENTE" Multiplicity="1" />
+    <End Role="HAMBURGUER_INGREDIENTE" Type="Self.HAMBURGUER_INGREDIENTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INGREDIENTE">
+        <PropertyRef Name="COD_INGREDIENTE" />
+      </Principal>
+      <Dependent Role="HAMBURGUER_INGREDIENTE">
+        <PropertyRef Name="COD_INGREDIENTE_FK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PEDIDO_HAMBURGUER_PEDIDO">
+    <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="1" />
+    <End Role="PEDIDO_HAMBURGUER" Type="Self.PEDIDO_HAMBURGUER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PEDIDO">
+        <PropertyRef Name="COD_PEDIDO" />
+      </Principal>
+      <Dependent Role="PEDIDO_HAMBURGUER">
+        <PropertyRef Name="COD_PEDIDO_FK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DBModels" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" />
+    <EntitySet Name="COMSUMIDOR" EntityType="Self.COMSUMIDOR" />
+    <EntitySet Name="COZINHEIRO" EntityType="Self.COZINHEIRO" />
+    <EntitySet Name="HAMBURGUER" EntityType="Self.HAMBURGUER" />
+    <EntitySet Name="HAMBURGUER_INGREDIENTE" EntityType="Self.HAMBURGUER_INGREDIENTE" />
+    <EntitySet Name="INGREDIENTE" EntityType="Self.INGREDIENTE" />
+    <EntitySet Name="PEDIDO" EntityType="Self.PEDIDO" />
+    <EntitySet Name="PEDIDO_HAMBURGUER" EntityType="Self.PEDIDO_HAMBURGUER" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <AssociationSet Name="FK__CLIENTE_COZINHEIRO" Association="Self.FK__CLIENTE_COZINHEIRO">
+      <End Role="CLIENTE" EntitySet="CLIENTE" />
+      <End Role="COZINHEIRO" EntitySet="COZINHEIRO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CLIENTE_COMSUMIDOR" Association="Self.FK_CLIENTE_COMSUMIDOR">
+      <End Role="CLIENTE" EntitySet="CLIENTE" />
+      <End Role="COMSUMIDOR" EntitySet="COMSUMIDOR" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PEDIDO_COMSUMIDOR" Association="Self.FK_PEDIDO_COMSUMIDOR">
+      <End Role="COMSUMIDOR" EntitySet="COMSUMIDOR" />
+      <End Role="PEDIDO" EntitySet="PEDIDO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PEDIDO_COZINHEIRO" Association="Self.FK_PEDIDO_COZINHEIRO">
+      <End Role="COZINHEIRO" EntitySet="COZINHEIRO" />
+      <End Role="PEDIDO" EntitySet="PEDIDO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HAMBURGUER_INGREDIENTE_HAMBURGUER" Association="Self.FK_HAMBURGUER_INGREDIENTE_HAMBURGUER">
+      <End Role="HAMBURGUER" EntitySet="HAMBURGUER" />
+      <End Role="HAMBURGUER_INGREDIENTE" EntitySet="HAMBURGUER_INGREDIENTE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PEDIDO_HAMBURGUER_HAMBURGUER" Association="Self.FK_PEDIDO_HAMBURGUER_HAMBURGUER">
+      <End Role="HAMBURGUER" EntitySet="HAMBURGUER" />
+      <End Role="PEDIDO_HAMBURGUER" EntitySet="PEDIDO_HAMBURGUER" />
+    </AssociationSet>
+    <AssociationSet Name="FK_INGREDIENTE_HAMBURGUER_INGREDIENTE" Association="Self.FK_INGREDIENTE_HAMBURGUER_INGREDIENTE">
+      <End Role="INGREDIENTE" EntitySet="INGREDIENTE" />
+      <End Role="HAMBURGUER_INGREDIENTE" EntitySet="HAMBURGUER_INGREDIENTE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PEDIDO_HAMBURGUER_PEDIDO" Association="Self.FK_PEDIDO_HAMBURGUER_PEDIDO">
+      <End Role="PEDIDO" EntitySet="PEDIDO" />
+      <End Role="PEDIDO_HAMBURGUER" EntitySet="PEDIDO_HAMBURGUER" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
