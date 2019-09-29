@@ -1,0 +1,88 @@
+﻿@model IEnumerable<SiteHamburguer.Models.CLIENTE>
+@{
+    ViewBag.Title = "ClienteIndex";
+}
+
+<h2>Index</h2>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.COD_CLIENTE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NOME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CPF)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RG)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TELEFONE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CIDADE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BAIRRO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RUA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NUMERO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.COMPLEMENTO)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>
+                @Html.DisplayFor(modelItem => item.COD_CLIENTE)
+            </th>
+            <td>
+                @Html.DisplayFor(modelItem => item.NOME)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CPF)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RG)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.TELEFONE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CIDADE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BAIRRO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RUA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NUMERO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.COMPLEMENTO)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.COD_CLIENTE }) |
+                @Html.ActionLink("Details", "Details", new { id = item.COD_CLIENTE }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.COD_CLIENTE })
+            </td>
+        </tr>
+    }
+
+</table>

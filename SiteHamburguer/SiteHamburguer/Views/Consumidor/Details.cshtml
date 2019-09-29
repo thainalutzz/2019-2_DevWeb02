@@ -1,0 +1,50 @@
+﻿@model SiteHamburguer.Models.COMSUMIDOR
+
+    @{
+        ViewBag.Title = "Details";
+    }
+
+    <h2>Details</h2>
+
+    <div>
+        <h4>COMSUMIDOR</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.COD_CONSUMIDOR)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.COD_CONSUMIDOR)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.COD_CLIENTE_FK)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.COD_CLIENTE_FK)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.FORMA_PAGTO)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FORMA_PAGTO)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.SENHA_CON)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SENHA_CON)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.COD_CONSUMIDOR }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>

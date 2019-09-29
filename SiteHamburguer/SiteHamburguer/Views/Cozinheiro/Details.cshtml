@@ -1,0 +1,53 @@
+﻿@model SiteHamburguer.Models.COZINHEIRO
+
+    @{
+        ViewBag.Title = "Details";
+    }
+
+    <h2>Details</h2>
+
+    <div>
+        <h4>COZINHEIRO</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.COD_COZINHEIRO)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.COD_COZINHEIRO)
+            </dd>
+
+
+
+
+            <dt>
+                @Html.DisplayNameFor(model => model.COD_CLIENTE_FK)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.COD_CLIENTE_FK)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CERTIFICACAO)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CERTIFICACAO)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.SENHA_COZ)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SENHA_COZ)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.COD_COZINHEIRO }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
