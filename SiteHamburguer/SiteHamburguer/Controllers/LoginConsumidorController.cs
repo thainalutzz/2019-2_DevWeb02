@@ -14,43 +14,48 @@ namespace SiteHamburguer.Controllers
         // GET: Login
         public ActionResult Index()
         {
+            
             return View();
         }
 
         [HttpPost]
-        public ActionResult Autorize(SiteHamburguer.Models.DBModels.InfoLogin info)
+        public ActionResult Autorize(SiteHamburguer.Models.InfoLogin info)
         {
+            
             using (DBModels db = new DBModels())
             {
-                var loginTelefone = db.CLIENTE.Where(x => x.TELEFONE == info.CLIENTE.TELEFONE).FirstOrDefault();
+                var loginUsuario = db.CLIENTE.Where(x => x.NOME == info.CLIENTE.NOME).FirstOrDefault();
+                ModelState.Clear();
                 // var loginSenha = db.COMSUMIDOR.Where(x => x.SENHA_CON == info.COMSUMIDOR.SENHA_CON).FirstOrDefault();
-                if (loginTelefone == null)
+                if (loginUsuario == null)
                 {
-                    info.CLIENTE.LoginErroMessagem = "Usuário nao existe";
+                    
+                    info.LoginErroMessagem = "Usuário nao existe";
                     return View("Index", info);
                 }
+
                 else
                 {
                     try
                     {
-                        var loginSenha = db.COMSUMIDOR.Where(x => x.COD_CLIENTE_FK == loginTelefone.COD_CLIENTE).FirstOrDefault();
+                        var loginSenha = db.COMSUMIDOR.Where(x => x.COD_CLIENTE_FK == loginUsuario.COD_CLIENTE).FirstOrDefault();
                         if (loginSenha.SENHA_CON == info.COMSUMIDOR.SENHA_CON)
                         {
 
                             //senha certa
-                            Session["clienteCOD"] = loginTelefone.COD_CLIENTE;
-                            Session["clienteTelefone"] = loginTelefone.TELEFONE;
+                            Session["clienteCOD"] = loginUsuario.COD_CLIENTE;
+                            Session["clienteUsuario"] = loginUsuario.NOME;
                             return RedirectToAction("Index", "HomeConsumidor");
                         }
                         else
                         {
-                            info.CLIENTE.LoginErroMessagem = "Senha incorreta";
+                            info.LoginErroMessagem = "Senha incorreta";
                             return View("Index", info);
                         }
                     }
                     catch (NullReferenceException)
                     {
-                        info.CLIENTE.LoginErroMessagem = "Senha incorreta";
+                        info.LoginErroMessagem = "Senha incorreta";
                         return View("Index", info);
                     }
                 }
@@ -64,6 +69,13 @@ namespace SiteHamburguer.Controllers
             Session.Abandon();
             return RedirectToAction("Index", "LoginConsumidor");
         }
+        public ActionResult RealizarPedido()
+        {
+            int clienteCOD = (int)Session["clienteCOD"];
+            return RedirectToAction("Pao", "RealizaPedido");
+        }
+
+
 
 
     }

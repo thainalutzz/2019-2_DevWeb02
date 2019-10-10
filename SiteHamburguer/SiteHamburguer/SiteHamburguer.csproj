@@ -141,6 +141,7 @@
     <Compile Include="Controllers\LoginCozinheiroController.cs" />
     <Compile Include="Controllers\PedidoController.cs" />
     <Compile Include="Controllers\Pedido_HamburguerController.cs" />
+    <Compile Include="Controllers\RealizaPedidoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -174,12 +175,14 @@
     <Compile Include="Models\HAMBURGUER_INGREDIENTE.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\InfoLogin.cs" />
     <Compile Include="Models\INGREDIENTE.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PEDIDO.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PedidoRadioButton.cs" />
     <Compile Include="Models\PEDIDO_HAMBURGUER.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
@@ -285,6 +288,7 @@
     <Content Include="Views\LoginConsumidor\Index.cshtml" />
     <Content Include="Views\LoginCozinheiro\Index.cshtml" />
     <Content Include="Views\HomeCozinheiro\Index.cshtml" />
+    <Content Include="Views\RealizaPedido\Pao.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

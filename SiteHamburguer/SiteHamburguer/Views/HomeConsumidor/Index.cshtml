@@ -13,8 +13,10 @@
 <body>
     <div>
         <h1>DashBoard</h1>
-        <h3>Telefone: @Session["clienteTelefone"]</h3>
+        <h3>Usuário: @Session["clienteUsuario"]</h3>
         <a href="@Url.Action("logOut", "LoginConsumidor")">Logout</a>
+        <a href="@Url.Action("RealizarPedido", "LoginConsumidor")">Pedido</a>
+
     </div>
 </body>
 

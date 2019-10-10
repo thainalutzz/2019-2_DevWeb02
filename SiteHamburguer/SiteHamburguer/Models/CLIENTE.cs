@@ -36,6 +36,5 @@ namespace SiteHamburguer.Models
         public virtual ICollection<COZINHEIRO> COZINHEIRO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<COMSUMIDOR> COMSUMIDOR { get; set; }
-        public string LoginErroMessagem { get; set; }
     }
 }

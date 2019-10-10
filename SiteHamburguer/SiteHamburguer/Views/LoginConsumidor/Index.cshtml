@@ -1,5 +1,5 @@
 ﻿@using SiteHamburguer.Models;
-@model SiteHamburguer.Models.DBModels.InfoLogin
+@model SiteHamburguer.Models.InfoLogin
 
 <h2>Index</h2>
 <style>
@@ -26,10 +26,10 @@
                 </tr>
                 <tr>
                     <td>
-                        @Html.LabelFor(model => model.CLIENTE.TELEFONE)
+                        @Html.LabelFor(model => model.CLIENTE.NOME)
                     </td>
                     <td>
-                        @Html.EditorFor(model => model.CLIENTE.TELEFONE)
+                        @Html.EditorFor(model => model.CLIENTE.NOME)
                     </td>
                 </tr>
                 <tr>
@@ -54,7 +54,7 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <label class="field-validation-error">@Html.DisplayFor(model => model.CLIENTE.LoginErroMessagem)</label>
+                        <label class="field-validation-error">@Html.DisplayFor(model => model.LoginErroMessagem)</label>
                     </td>
                 </tr>
                 <tr>

@@ -34,19 +34,5 @@ namespace SiteHamburguer.Models
         public virtual DbSet<PEDIDO> PEDIDO { get; set; }
         public virtual DbSet<PEDIDO_HAMBURGUER> PEDIDO_HAMBURGUER { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
-        public class InfoLogin
-        {
-            public CLIENTE CLIENTE { get; set; }
-            public COMSUMIDOR COMSUMIDOR { get; set; }
-
-            public COZINHEIRO COZINHEIRO { get; set; }
-
-            public InfoLogin()
-            {
-                CLIENTE = new CLIENTE();
-                COMSUMIDOR = new COMSUMIDOR();
-                COZINHEIRO = new COZINHEIRO();
-            }
-        }
     }
 }
