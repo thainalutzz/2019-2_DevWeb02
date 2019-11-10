@@ -17,8 +17,8 @@ namespace SiteHamburguer.Models
         public int COD_PEDIDO_HAMBURGUER { get; set; }
         public int COD_PEDIDO_FK { get; set; }
         public int COD_HAMBURGUER_FK { get; set; }
-        public int QUANTIDADE_PED_HAM { get; set; }
-        public double PRECO_TOTAL_PED_HAM { get; set; }
+        public Nullable<int> QUANTIDADE_PED_HAM { get; set; }
+        public Nullable<double> PRECO_TOTAL_PED_HAM { get; set; }
     
         public virtual HAMBURGUER HAMBURGUER { get; set; }
         public virtual PEDIDO PEDIDO { get; set; }

@@ -12,6 +12,8 @@ namespace SiteHamburguer.Models
         public COMSUMIDOR COMSUMIDOR { get; set; }
         public COZINHEIRO COZINHEIRO { get; set; }
 
+        
+
         public string LoginErroMessagem { get; set; }
         public InfoLogin()
         {

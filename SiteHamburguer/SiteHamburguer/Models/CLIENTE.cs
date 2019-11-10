@@ -22,6 +22,7 @@ namespace SiteHamburguer.Models
         }
     
         public int COD_CLIENTE { get; set; }
+        public string NOME { get; set; }
         public int CPF { get; set; }
         public int RG { get; set; }
         public int TELEFONE { get; set; }
@@ -30,7 +31,6 @@ namespace SiteHamburguer.Models
         public string RUA { get; set; }
         public int NUMERO { get; set; }
         public string COMPLEMENTO { get; set; }
-        public string NOME { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<COZINHEIRO> COZINHEIRO { get; set; }

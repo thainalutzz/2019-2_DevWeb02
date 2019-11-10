@@ -22,11 +22,11 @@
             <table>
                 <tr>
                     <td></td>
-                    <td style="text-decoration:underline">Teste</td>
+                    @*<td style="text-decoration:underline">Teste</td>*@
                 </tr>
                 <tr>
                     <td>
-                        @Html.LabelFor(model => model.CLIENTE.NOME)
+                        @Html.Label("Usuário")
                     </td>
                     <td>
                         @Html.EditorFor(model => model.CLIENTE.NOME)
@@ -40,7 +40,7 @@
                 </tr>
                 <tr>
                     <td>
-                        @Html.LabelFor(model => model.COZINHEIRO.SENHA_COZ)
+                        @Html.Label("Senha")
                     </td>
                     <td>
                         @Html.EditorFor(model => model.COZINHEIRO.SENHA_COZ)

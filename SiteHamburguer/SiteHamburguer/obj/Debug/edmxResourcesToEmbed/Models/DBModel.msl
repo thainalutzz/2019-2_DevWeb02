@@ -4,8 +4,8 @@
     <EntitySetMapping Name="CLIENTE">
       <EntityTypeMapping TypeName="SiteModel.CLIENTE">
         <MappingFragment StoreEntitySet="CLIENTE">
-          <ScalarProperty Name="NOME" ColumnName="NOME" />
           <ScalarProperty Name="COD_CLIENTE" ColumnName="COD_CLIENTE" />
+          <ScalarProperty Name="NOME" ColumnName="NOME" />
           <ScalarProperty Name="CPF" ColumnName="CPF" />
           <ScalarProperty Name="RG" ColumnName="RG" />
           <ScalarProperty Name="TELEFONE" ColumnName="TELEFONE" />

@@ -43,7 +43,7 @@
             <PropertyRef Name="COD_HAMBURGUER" />
           </Key>
           <Property Name="COD_HAMBURGUER" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="PRECO_HAMBURGUER" Type="float" Nullable="false" />
+          <Property Name="PRECO_HAMBURGUER" Type="float" />
         </EntityType>
         <EntityType Name="HAMBURGUER_INGREDIENTE">
           <Key>
@@ -51,9 +51,9 @@
           </Key>
           <Property Name="COD_HAMBURGUER_INGREDIENTE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="COD_HAMBURGUER_FK" Type="int" Nullable="false" />
-          <Property Name="COD_INGREDIENTE_FK" Type="int" Nullable="false" />
-          <Property Name="QUANTIDADE" Type="int" Nullable="false" />
-          <Property Name="PRECO_TOTAL_HAM_ING" Type="float" Nullable="false" />
+          <Property Name="COD_INGREDIENTE_FK" Type="int" />
+          <Property Name="QUANTIDADE" Type="int" />
+          <Property Name="PRECO_TOTAL_HAM_ING" Type="float" />
         </EntityType>
         <EntityType Name="INGREDIENTE">
           <Key>
@@ -70,9 +70,9 @@
           </Key>
           <Property Name="COD_PEDIDO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="COD_CONSUMIDOR_FK" Type="int" Nullable="false" />
-          <Property Name="COD_COZINHEIRO_FK" Type="int" Nullable="false" />
-          <Property Name="PRECO_PEDIDO" Type="float" Nullable="false" />
-          <Property Name="STATUS" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="COD_COZINHEIRO_FK" Type="int" />
+          <Property Name="PRECO_PEDIDO" Type="float" />
+          <Property Name="STATUS" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="PEDIDO_HAMBURGUER">
           <Key>
@@ -81,8 +81,8 @@
           <Property Name="COD_PEDIDO_HAMBURGUER" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="COD_PEDIDO_FK" Type="int" Nullable="false" />
           <Property Name="COD_HAMBURGUER_FK" Type="int" Nullable="false" />
-          <Property Name="QUANTIDADE_PED_HAM" Type="int" Nullable="false" />
-          <Property Name="PRECO_TOTAL_PED_HAM" Type="float" Nullable="false" />
+          <Property Name="QUANTIDADE_PED_HAM" Type="int" />
+          <Property Name="PRECO_TOTAL_PED_HAM" Type="float" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -131,7 +131,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_INGREDIENTE_HAMBURGUER_INGREDIENTE">
-          <End Role="INGREDIENTE" Type="Self.INGREDIENTE" Multiplicity="1" />
+          <End Role="INGREDIENTE" Type="Self.INGREDIENTE" Multiplicity="0..1" />
           <End Role="HAMBURGUER_INGREDIENTE" Type="Self.HAMBURGUER_INGREDIENTE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="INGREDIENTE">
@@ -155,7 +155,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PEDIDO_COZINHEIRO">
-          <End Role="COZINHEIRO" Type="Self.COZINHEIRO" Multiplicity="1" />
+          <End Role="COZINHEIRO" Type="Self.COZINHEIRO" Multiplicity="0..1" />
           <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="COZINHEIRO">
@@ -242,6 +242,7 @@
             <PropertyRef Name="COD_CLIENTE" />
           </Key>
           <Property Name="COD_CLIENTE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOME" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="CPF" Type="Int32" Nullable="false" />
           <Property Name="RG" Type="Int32" Nullable="false" />
           <Property Name="TELEFONE" Type="Int32" Nullable="false" />
@@ -252,7 +253,6 @@
           <Property Name="COMPLEMENTO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="COZINHEIRO" Relationship="Self.FK__CLIENTE_COZINHEIRO" FromRole="CLIENTE" ToRole="COZINHEIRO" />
           <NavigationProperty Name="COMSUMIDOR" Relationship="Self.FK_CLIENTE_COMSUMIDOR" FromRole="CLIENTE" ToRole="COMSUMIDOR" />
-          <Property Name="NOME" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="false" />
         </EntityType>
         <EntityType Name="COMSUMIDOR">
           <Key>
@@ -281,7 +281,7 @@
             <PropertyRef Name="COD_HAMBURGUER" />
           </Key>
           <Property Name="COD_HAMBURGUER" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PRECO_HAMBURGUER" Type="Double" Nullable="false" />
+          <Property Name="PRECO_HAMBURGUER" Type="Double" />
           <NavigationProperty Name="HAMBURGUER_INGREDIENTE" Relationship="Self.FK_HAMBURGUER_INGREDIENTE_HAMBURGUER" FromRole="HAMBURGUER" ToRole="HAMBURGUER_INGREDIENTE" />
           <NavigationProperty Name="PEDIDO_HAMBURGUER" Relationship="Self.FK_PEDIDO_HAMBURGUER_HAMBURGUER" FromRole="HAMBURGUER" ToRole="PEDIDO_HAMBURGUER" />
         </EntityType>
@@ -291,9 +291,9 @@
           </Key>
           <Property Name="COD_HAMBURGUER_INGREDIENTE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="COD_HAMBURGUER_FK" Type="Int32" Nullable="false" />
-          <Property Name="COD_INGREDIENTE_FK" Type="Int32" Nullable="false" />
-          <Property Name="QUANTIDADE" Type="Int32" Nullable="false" />
-          <Property Name="PRECO_TOTAL_HAM_ING" Type="Double" Nullable="false" />
+          <Property Name="COD_INGREDIENTE_FK" Type="Int32" />
+          <Property Name="QUANTIDADE" Type="Int32" />
+          <Property Name="PRECO_TOTAL_HAM_ING" Type="Double" />
           <NavigationProperty Name="HAMBURGUER" Relationship="Self.FK_HAMBURGUER_INGREDIENTE_HAMBURGUER" FromRole="HAMBURGUER_INGREDIENTE" ToRole="HAMBURGUER" />
           <NavigationProperty Name="INGREDIENTE" Relationship="Self.FK_INGREDIENTE_HAMBURGUER_INGREDIENTE" FromRole="HAMBURGUER_INGREDIENTE" ToRole="INGREDIENTE" />
         </EntityType>
@@ -313,9 +313,9 @@
           </Key>
           <Property Name="COD_PEDIDO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="COD_CONSUMIDOR_FK" Type="Int32" Nullable="false" />
-          <Property Name="COD_COZINHEIRO_FK" Type="Int32" Nullable="false" />
-          <Property Name="PRECO_PEDIDO" Type="Double" Nullable="false" />
-          <Property Name="STATUS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="COD_COZINHEIRO_FK" Type="Int32" />
+          <Property Name="PRECO_PEDIDO" Type="Double" />
+          <Property Name="STATUS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="COMSUMIDOR" Relationship="Self.FK_PEDIDO_COMSUMIDOR" FromRole="PEDIDO" ToRole="COMSUMIDOR" />
           <NavigationProperty Name="COZINHEIRO" Relationship="Self.FK_PEDIDO_COZINHEIRO" FromRole="PEDIDO" ToRole="COZINHEIRO" />
           <NavigationProperty Name="PEDIDO_HAMBURGUER" Relationship="Self.FK_PEDIDO_HAMBURGUER_PEDIDO" FromRole="PEDIDO" ToRole="PEDIDO_HAMBURGUER" />
@@ -327,8 +327,8 @@
           <Property Name="COD_PEDIDO_HAMBURGUER" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="COD_PEDIDO_FK" Type="Int32" Nullable="false" />
           <Property Name="COD_HAMBURGUER_FK" Type="Int32" Nullable="false" />
-          <Property Name="QUANTIDADE_PED_HAM" Type="Int32" Nullable="false" />
-          <Property Name="PRECO_TOTAL_PED_HAM" Type="Double" Nullable="false" />
+          <Property Name="QUANTIDADE_PED_HAM" Type="Int32" />
+          <Property Name="PRECO_TOTAL_PED_HAM" Type="Double" />
           <NavigationProperty Name="HAMBURGUER" Relationship="Self.FK_PEDIDO_HAMBURGUER_HAMBURGUER" FromRole="PEDIDO_HAMBURGUER" ToRole="HAMBURGUER" />
           <NavigationProperty Name="PEDIDO" Relationship="Self.FK_PEDIDO_HAMBURGUER_PEDIDO" FromRole="PEDIDO_HAMBURGUER" ToRole="PEDIDO" />
         </EntityType>
@@ -379,7 +379,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PEDIDO_COZINHEIRO">
-          <End Role="COZINHEIRO" Type="Self.COZINHEIRO" Multiplicity="1" />
+          <End Role="COZINHEIRO" Type="Self.COZINHEIRO" Multiplicity="0..1" />
           <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="COZINHEIRO">
@@ -415,7 +415,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_INGREDIENTE_HAMBURGUER_INGREDIENTE">
-          <End Role="INGREDIENTE" Type="Self.INGREDIENTE" Multiplicity="1" />
+          <End Role="INGREDIENTE" Type="Self.INGREDIENTE" Multiplicity="0..1" />
           <End Role="HAMBURGUER_INGREDIENTE" Type="Self.HAMBURGUER_INGREDIENTE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="INGREDIENTE">
@@ -490,8 +490,8 @@
           <EntitySetMapping Name="CLIENTE">
             <EntityTypeMapping TypeName="SiteModel.CLIENTE">
               <MappingFragment StoreEntitySet="CLIENTE">
-                <ScalarProperty Name="NOME" ColumnName="NOME" />
                 <ScalarProperty Name="COD_CLIENTE" ColumnName="COD_CLIENTE" />
+                <ScalarProperty Name="NOME" ColumnName="NOME" />
                 <ScalarProperty Name="CPF" ColumnName="CPF" />
                 <ScalarProperty Name="RG" ColumnName="RG" />
                 <ScalarProperty Name="TELEFONE" ColumnName="TELEFONE" />

@@ -22,8 +22,8 @@ namespace SiteHamburguer.Models
     
         public int COD_PEDIDO { get; set; }
         public int COD_CONSUMIDOR_FK { get; set; }
-        public int COD_COZINHEIRO_FK { get; set; }
-        public double PRECO_PEDIDO { get; set; }
+        public Nullable<int> COD_COZINHEIRO_FK { get; set; }
+        public Nullable<double> PRECO_PEDIDO { get; set; }
         public string STATUS { get; set; }
     
         public virtual COMSUMIDOR COMSUMIDOR { get; set; }

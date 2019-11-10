@@ -4,15 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="fdd7f69964c34692b0e801272ceb2401" Name="Diagram1">
-        <EntityTypeShape EntityType="SiteModel.CLIENTE" Width="1.5" PointX="0.625" PointY="2.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SiteModel.COMSUMIDOR" Width="1.5" PointX="3.25" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="SiteModel.COZINHEIRO" Width="1.5" PointX="2.875" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SiteModel.HAMBURGUER" Width="1.5" PointX="5.375" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="SiteModel.HAMBURGUER_INGREDIENTE" Width="2.5" PointX="9.875" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="SiteModel.INGREDIENTE" Width="2.375" PointX="10.75" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="SiteModel.PEDIDO" Width="1.75" PointX="5.25" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="SiteModel.PEDIDO_HAMBURGUER" Width="2.25" PointX="7.75" PointY="4.375" IsExpanded="true" />
+      <Diagram DiagramId="6d03c3bc0f164e2da9470ae83650a6ed" Name="Diagram1">
+        <EntityTypeShape EntityType="SiteModel.CLIENTE" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SiteModel.COMSUMIDOR" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SiteModel.COZINHEIRO" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SiteModel.HAMBURGUER" Width="2.25" PointX="11.5" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SiteModel.HAMBURGUER_INGREDIENTE" Width="2.875" PointX="11" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SiteModel.INGREDIENTE" Width="2.125" PointX="8" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SiteModel.PEDIDO" Width="2.25" PointX="5.375" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SiteModel.PEDIDO_HAMBURGUER" Width="2.625" PointX="8.25" PointY="6.25" IsExpanded="true" />
         <EntityTypeShape EntityType="SiteModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="9.875" IsExpanded="true" />
         <AssociationConnector Association="SiteModel.FK__CLIENTE_COZINHEIRO" ManuallyRouted="false" />
         <AssociationConnector Association="SiteModel.FK_CLIENTE_COMSUMIDOR" ManuallyRouted="false" />

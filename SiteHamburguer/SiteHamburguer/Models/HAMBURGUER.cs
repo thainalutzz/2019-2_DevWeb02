@@ -22,7 +22,7 @@ namespace SiteHamburguer.Models
         }
     
         public int COD_HAMBURGUER { get; set; }
-        public double PRECO_HAMBURGUER { get; set; }
+        public Nullable<double> PRECO_HAMBURGUER { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HAMBURGUER_INGREDIENTE> HAMBURGUER_INGREDIENTE { get; set; }
