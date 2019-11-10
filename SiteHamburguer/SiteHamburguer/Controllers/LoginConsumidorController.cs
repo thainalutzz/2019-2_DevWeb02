@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using SiteHamburguer.Models;
 using System.Data.Entity;
-
+using System.Web.Routing;
 
 namespace SiteHamburguer.Controllers
 {
@@ -43,7 +43,8 @@ namespace SiteHamburguer.Controllers
                         {
 
                             //senha certa
-                            Session["clienteCOD"] = loginUsuario.COD_CLIENTE;
+                            //Session["clienteCOD"] = loginUsuario.COD_CLIENTE;
+                            Session["clienteCOD"] = loginSenha.COD_CONSUMIDOR;
                             Session["clienteUsuario"] = loginUsuario.NOME;
                             return RedirectToAction("Index", "HomeConsumidor");
                         }
@@ -71,8 +72,61 @@ namespace SiteHamburguer.Controllers
         }
         public ActionResult RealizarPedido()
         {
+           
+            DBModels db = new DBModels();
+            PedidoRadioButton rb = new PedidoRadioButton();
+            
             int clienteCOD = (int)Session["clienteCOD"];
-            return RedirectToAction("Pao", "RealizaPedido");
+            PEDIDO pedido = new PEDIDO();
+            {
+                pedido.COD_CONSUMIDOR_FK = clienteCOD;
+            }
+            db.PEDIDO.Add(pedido);
+            db.SaveChanges();
+            Session["pedidoCOD"] = pedido.COD_PEDIDO;
+            return RedirectToAction("CreateItemPedido", "RealizaPedido");
+            //PedidoController pedidoControler = new PedidoController();
+            // return RedirectToAction("Create", "Pedido" );//nao esta passando o valor do pedido
+
+            //return RedirectToAction("Create","Pedido", new {
+            //    pedido = pedidoR
+            //});
+            // return   pedidoControler.Create(pedidoR);
+            //return RedirectToAction("Create", new RouteValueDictionary(new
+            //{
+            //    Controller = "Pedido",
+            //    ActionResult = "Create",
+            //    pedido = pedidoR
+            //}));
+
+            //Int32 ultimoPedido = new Int32();
+            //ultimoPedido = 0;
+
+            //foreach (PEDIDO itemPedido in db.PEDIDO.ToList())
+            //{
+            //    if (ultimoPedido == 0)
+            //    {
+            //        ultimoPedido = itemPedido.COD_PEDIDO;
+            //    }
+            //    else
+            //    {
+            //        if (ultimoPedido < itemPedido.COD_PEDIDO)
+            //        {
+            //            ultimoPedido = itemPedido.COD_PEDIDO;
+            //        }
+            //    }
+            //}
+
+            //Session["pedidoCOD"] = ultimoPedido;
+            //return RedirectToAction("Index", "RealizaPedido");
+
+
+
+
+            //int pedidoCOD = (int)Session["pedidoCOD"];
+
+
+            //return RedirectToAction("Pao", "RealizaPedido");
         }
 
 

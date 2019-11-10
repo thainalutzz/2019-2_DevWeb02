@@ -36,15 +36,37 @@ namespace SiteHamburguer.Controllers
 
         // POST: Cliente/Create
         [HttpPost]
-        public ActionResult Create(COMSUMIDOR consumidor)
+        public ActionResult Create(InfoLogin info)
         {
             try
             {
                 using (DBModels db = new DBModels())
                 {
-                    db.COMSUMIDOR.Add(consumidor);
+                    db.CLIENTE.Add(info.CLIENTE);
+                    db.SaveChanges();
+
+                    Int32 ultimoCliente = new Int32();
+                    ultimoCliente = 0;
+
+                    foreach (CLIENTE cli in db.CLIENTE.ToList())
+                    {
+                        if (ultimoCliente == 0)
+                        {
+                            ultimoCliente = cli.COD_CLIENTE;
+                        }
+                        else
+                        {
+                            if (ultimoCliente < cli.COD_CLIENTE)
+                            {
+                                ultimoCliente = cli.COD_CLIENTE;
+                            }
+                        }
+                    }
+                    info.COMSUMIDOR.COD_CLIENTE_FK = ultimoCliente;
+                    db.COMSUMIDOR.Add(info.COMSUMIDOR);
                     db.SaveChanges();
                 }
+                
                 return RedirectToAction("Index");
             }
             catch
@@ -52,6 +74,40 @@ namespace SiteHamburguer.Controllers
                 return View();
             }
         }
+        //public ActionResult CreateCon(COMSUMIDOR consumidor)
+        //{
+        //    try
+        //    {
+        //        using (DBModels db = new DBModels())
+        //        {
+        //            Int32 ultimoCliente = new Int32();
+        //            ultimoCliente = 0;
+
+        //            foreach (CLIENTE cliente in db.CLIENTE.ToList())
+        //            {
+        //                if (ultimoCliente == 0)
+        //                {
+        //                    ultimoCliente = cliente.COD_CLIENTE;
+        //                }
+        //                else
+        //                {
+        //                    if (ultimoCliente < cliente.COD_CLIENTE)
+        //                    {
+        //                        ultimoCliente = cliente.COD_CLIENTE;
+        //                    }
+        //                }
+        //            }
+        //            consumidor.COD_CLIENTE_FK = ultimoCliente;
+        //            db.COMSUMIDOR.Add(consumidor);
+        //            db.SaveChanges();
+        //        }
+        //        return RedirectToAction("Index");
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
 
         // GET: Cliente/Edit/5
         public ActionResult Edit(int id)

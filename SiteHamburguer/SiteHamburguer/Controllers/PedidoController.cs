@@ -39,12 +39,17 @@ namespace SiteHamburguer.Controllers
         {
             try
             {
+
                 using (DBModels db = new DBModels())
                 {
+                   
                     db.PEDIDO.Add(pedido);
                     db.SaveChanges();
                 }
-                return RedirectToAction("Index");
+
+                Session["pedidoCOD"] = pedido.COD_PEDIDO;
+                return RedirectToAction("CreateItemPedido", "RealizaPedido");
+                //return RedirectToAction("Index");
             }
             catch
             {

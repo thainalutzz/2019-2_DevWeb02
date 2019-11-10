@@ -36,15 +36,37 @@ namespace SiteHamburguer.Controllers
 
         // POST: Cliente/Create
         [HttpPost]
-        public ActionResult Create(COZINHEIRO cozinheiro)
+        public ActionResult Create(InfoLogin info)
         {
             try
             {
                 using (DBModels db = new DBModels())
                 {
-                    db.COZINHEIRO.Add(cozinheiro);
+                    db.CLIENTE.Add(info.CLIENTE);
+                    db.SaveChanges();
+
+                    Int32 ultimoCliente = new Int32();
+                    ultimoCliente = 0;
+
+                    foreach (CLIENTE cli in db.CLIENTE.ToList())
+                    {
+                        if (ultimoCliente == 0)
+                        {
+                            ultimoCliente = cli.COD_CLIENTE;
+                        }
+                        else
+                        {
+                            if (ultimoCliente < cli.COD_CLIENTE)
+                            {
+                                ultimoCliente = cli.COD_CLIENTE;
+                            }
+                        }
+                    }
+                    info.COZINHEIRO.COD_CLIENTE_FK = ultimoCliente;
+                    db.COZINHEIRO.Add(info.COZINHEIRO);
                     db.SaveChanges();
                 }
+
                 return RedirectToAction("Index");
             }
             catch
@@ -52,7 +74,6 @@ namespace SiteHamburguer.Controllers
                 return View();
             }
         }
-
         // GET: Cliente/Edit/5
         public ActionResult Edit(int id)
         {
