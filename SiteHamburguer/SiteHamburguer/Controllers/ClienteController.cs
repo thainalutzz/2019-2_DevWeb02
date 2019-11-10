@@ -37,15 +37,17 @@ namespace SiteHamburguer.Controllers
 
         // POST: Cliente/Create
         [HttpPost]
-        public ActionResult Create(CLIENTE cliente)
+        public ActionResult Create(CLIENTE cliente, COMSUMIDOR consumidor)
         {
             try
             {
                 using (DBModels db = new DBModels())
                 {
                     db.CLIENTE.Add(cliente);
-                    db.SaveChanges();
+                    db.SaveChanges();                    
                 }
+                // ConsumidorController consumidorController = new ConsumidorController();
+                //consumidorController.Create(consumidor);
                 return RedirectToAction("Index");
             }
             catch
