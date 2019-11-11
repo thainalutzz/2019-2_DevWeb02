@@ -16,131 +16,16 @@ namespace SiteHamburguer.Controllers
     {
         public ActionResult Index()
         {
-
             using (DBModels db = new DBModels())
             {
                 int codPedido = (int)Session["pedidoCOD"];
                 return View(db.PEDIDO_HAMBURGUER.Where(x => x.COD_PEDIDO_FK == codPedido).ToList());
 
                 //colocar botoes excluir e edit de HAMBURGUER, ao clicar Pedido_Hamburguer.Cod_Hamburguer_FK
+                //colocar botao para criar um novo hamburguer criarhamburguer
             }
         }
-        //GET: CriaHamburguer
-        //[HttpPost]
-        // public ActionResult CreateHamburguer(PEDIDO hamburguer)
-        // {
-        //     try
-        //     {
-        //         using (DBModels db = new DBModels())
-        //         {
-        //             db.HAMBURGUER.Add(hamburguer);
-        //             db.SaveChanges();
-        //         }
-        //         return RedirectToAction("CreateItem");
-        //     }
-        //     catch
-        //     {
-        //         return View();
-        //     }
-        // }
-
-        // GET: Adiciona Ingrediente ao Hamburguer
-        //public ActionResult CreateItem()
-        //{
-        //    return View();
-        //}
-        // [HttpPost]
-
-        //public ActionResult CreateItem(List<HAMBURGUER_INGREDIENTE> itemHamburguer)
-        //{
-        //    try
-        //    {
-        //        using (DBModels db = new DBModels())
-        //        {
-        //            //fazer com que receba mais de uma fk, criando outro hamburguer ingrediente com o mesmo fk hamburguer
-        //            foreach (HAMBURGUER_INGREDIENTE item in itemHamburguer)
-        //            {
-        //                db.HAMBURGUER_INGREDIENTE.Add(item);
-        //                db.SaveChanges();
-        //            }
-                       
-                    
-                     
-
-                    
-                   
-        //        }
-        //        return PartialView("CreateItem");
-        //       // return RedirectToAction("Index");
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
-        //public ActionResult CreatePedido()
-        //{
-        //    return View();
-        //}
-
-        //[HttpPost]
-        //public ActionResult CreatePedido(PedidoRadioButton rb)
-        //{
-        //    try
-        //    {
-        //        using (DBModels db = new DBModels())
-        //        {
-        //            db.HAMBURGUER.Add(rb.HAMBURGUER);
-        //            db.SaveChanges(); // adicionado para salvar o hamgurguer criado
-        //            Int32 ultimoHamburguer = new Int32();
-        //            ultimoHamburguer = 0;
-
-        //            foreach (HAMBURGUER ham in db.HAMBURGUER.ToList())
-        //            {
-        //                if (ultimoHamburguer == 0)
-        //                {
-        //                    ultimoHamburguer = ham.COD_HAMBURGUER;
-        //                }
-        //                else
-        //                {
-        //                    if (ultimoHamburguer < ham.COD_HAMBURGUER)
-        //                    {
-        //                        ultimoHamburguer = ham.COD_HAMBURGUER;
-        //                    }
-        //                }
-        //            }
-
-
-
-        //            rb.HAMBURGUER_INGREDIENTE.COD_HAMBURGUER_FK = ultimoHamburguer;
-        //            db.HAMBURGUER_INGREDIENTE.Add(rb.HAMBURGUER_INGREDIENTE);
-
-
-        //            para cada ingrediente selecionado no radiobutton, sera criado um hamburguer_ingrediente com o cod do ingrediente
-        //            que foi selecionado
-        //            com a mesma fk do ultimo Hamburguer criado
-
-
-
-
-
-
-        //            db.PEDIDO.Add(rb.PEDIDO); // ?
-        //            db.SaveChanges();
-
-
-
-
-        //        }
-
-        //        return RedirectToAction("CreateItem", "RealizaPedido", rb.HAMBURGUER_INGREDIENTE);
-        //        return RedirectToAction("Index");
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
+        
         public ActionResult CreateItemPedido()
         {
             return View();
@@ -152,6 +37,8 @@ namespace SiteHamburguer.Controllers
             {
                 Int32 ultimoHamburguer = new Int32();
                 ultimoHamburguer = 0;
+                Int32 ultimoPedidoHamburguer = new Int32();
+                ultimoPedidoHamburguer = 0;
 
                 using (DBModels db = new DBModels())
                 {
@@ -180,9 +67,24 @@ namespace SiteHamburguer.Controllers
 
                     db.PEDIDO_HAMBURGUER.Add(pedido_hamburguer);
                     db.SaveChanges();
+                                        
+                    foreach (PEDIDO_HAMBURGUER itemPedidoHamburguer in db.PEDIDO_HAMBURGUER.ToList())
+                    {
+                        if (ultimoPedidoHamburguer == 0)
+                        {
+                            ultimoPedidoHamburguer = itemPedidoHamburguer.COD_PEDIDO_HAMBURGUER;
+                        }
+                        else
+                        {
+                            if (ultimoPedidoHamburguer < itemPedidoHamburguer.COD_PEDIDO_HAMBURGUER)
+                            {
+                                ultimoPedidoHamburguer = itemPedidoHamburguer.COD_PEDIDO_HAMBURGUER;
+                            }
+                        }
+                    }
                 }
 
-                return CreateItemHamburguer(ultimoHamburguer, pedidoRadioButton.HAMBURGUER_INGREDIENTE_LIST);
+                return CreateItemHamburguer(ultimoHamburguer, ultimoPedidoHamburguer, pedidoRadioButton.HAMBURGUER_INGREDIENTE_LIST);
             }
             catch
             {
@@ -194,21 +96,62 @@ namespace SiteHamburguer.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult CreateItemHamburguer(int codHamburguer, List<HAMBURGUER_INGREDIENTE> lista_hamburguer_ingrediente)
+        public ActionResult CreateItemHamburguer(int codHamburguer, int codPedidoHamburguer, List<HAMBURGUER_INGREDIENTE> lista_hamburguer_ingrediente)
         {
             try
             {
                 using (DBModels db = new DBModels())
                 {
+                    double precoHamburguer = new double();
+                    precoHamburguer = 0;
+
                     foreach (HAMBURGUER_INGREDIENTE itemHamburguer in lista_hamburguer_ingrediente)
                     {
                         itemHamburguer.COD_HAMBURGUER_FK = codHamburguer;
 
-                        //calculo dos precos
+                        INGREDIENTE ingrediente = new INGREDIENTE();
+                        ingrediente = db.INGREDIENTE.Where(x => x.COD_INGREDIENTE == itemHamburguer.COD_INGREDIENTE_FK).FirstOrDefault();
+
+                        itemHamburguer.QUANTIDADE = 1;
+                        itemHamburguer.PRECO_TOTAL_HAM_ING = itemHamburguer.QUANTIDADE * ingrediente.PRECO_INGREDIENTE;
+
+                        precoHamburguer += Convert.ToDouble(itemHamburguer.PRECO_TOTAL_HAM_ING);
 
                         db.HAMBURGUER_INGREDIENTE.Add(itemHamburguer);
                         db.SaveChanges();
                     }
+                    HAMBURGUER hamburguer = new HAMBURGUER();
+                    hamburguer.COD_HAMBURGUER = codHamburguer;
+                    hamburguer.PRECO_HAMBURGUER = precoHamburguer;
+                    db.Entry(hamburguer).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    PEDIDO_HAMBURGUER pedido_hamburguer = new PEDIDO_HAMBURGUER();
+                    pedido_hamburguer.COD_PEDIDO_HAMBURGUER = codPedidoHamburguer;
+                    pedido_hamburguer.COD_PEDIDO_FK = (int)Session["pedidoCOD"];
+                    pedido_hamburguer.COD_HAMBURGUER_FK = codHamburguer;
+                    pedido_hamburguer.QUANTIDADE_PED_HAM = 1;
+                    pedido_hamburguer.PRECO_TOTAL_PED_HAM = pedido_hamburguer.QUANTIDADE_PED_HAM * hamburguer.PRECO_HAMBURGUER;
+                    db.Entry(pedido_hamburguer).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    PEDIDO pedido = new PEDIDO();
+                    pedido = db.PEDIDO.Where(x => x.COD_PEDIDO == pedido_hamburguer.COD_PEDIDO_FK).FirstOrDefault();
+                    //pedido.COD_PEDIDO = (int)Session["pedidoCOD"];
+                    //pedido.COD_CONSUMIDOR_FK = (int)Session["clienteCOD"];
+
+                    if(pedido.PRECO_PEDIDO != null)
+                    {
+                        pedido.PRECO_PEDIDO += pedido_hamburguer.PRECO_TOTAL_PED_HAM;
+                    }
+                    else
+                    {
+                        pedido.PRECO_PEDIDO = pedido_hamburguer.PRECO_TOTAL_PED_HAM;
+                    }
+
+
+                    db.Entry(pedido).State = EntityState.Modified;
+                    db.SaveChanges();
                 }
 
                 return RedirectToAction("Index");
@@ -218,67 +161,12 @@ namespace SiteHamburguer.Controllers
                 return View();
             }
         }
-
-        //// GET: RealizaPedido
-        //[HttpGet]
-        //public ActionResult Pao(PedidoRadioButton rb)
-        //{
-        //    // PedidoRadioButton rb = new PedidoRadioButton();
-        //    DBModels db = new DBModels();
-        //    //string mainconn = ConfigurationManager.ConnectionStrings["DBModels"].ConnectionString;
-        //    SqlConnection sqlconn = new SqlConnection();
-        //    string sqlquery = "insert into HAMBURGUER (PRECO_HAMBURGUER) values('0');select @@identity;insert HAMBURGUER_INGREDIENTE(COD_HAMBURGUER_FK, COD_INGREDIENTE_FK, QUANTIDADE, PRECO_TOTAL_HAM_ING) values(SCOPE_IDENTITY(), @pao, '1', '0'); ";
-        //    SqlCommand sqlcomm = new SqlCommand(sqlquery, sqlconn);
-        //    sqlcomm.Parameters.AddWithValue("@pao", rb.Pao);
-        //    sqlcomm.ExecuteNonQuery();
-        //    sqlconn.Close();
-        //    return View();
-        //}
-        //[HttpPost]
-        // public ActionResult Queijo()
-        //{
-        //   PedidoRadioButton rb = new PedidoRadioButton();
-        //    return View(rb);
-        //}
-        //public ActionResult Carne()
-        //{
-        //    PedidoRadioButton rb = new PedidoRadioButton();
-        //    return View(rb);
-        //}
-        //public ActionResult Molho()
-        //{
-        //    PedidoRadioButton rb = new PedidoRadioButton();
-        //    return View(rb);
-        //}
-        //public ActionResult Salada()
-        //{
-        //    PedidoRadioButton rb = new PedidoRadioButton();
-        //    return View(rb);
-        //}
-        //public ActionResult Adicionais()
-        //{
-        //    PedidoRadioButton rb = new PedidoRadioButton();
-        //    return View(rb);
-        //}
-        //public ActionResult Final()
-        //{
-        //    PedidoRadioButton rb = new PedidoRadioButton();
-        //    return View(rb);
-        //}
-
-
-
+        
         // GET: RealizaPedido/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
-
-        // GET: RealizaPedido/Create
-        //public ActionResult Create()
-        //{
-        //    return View();
-        //}
 
         // POST: RealizaPedido/Create
         [HttpPost]
