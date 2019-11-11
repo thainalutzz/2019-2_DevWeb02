@@ -13,7 +13,7 @@
     <Property Name="BAIRRO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="RUA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="NUMERO" Type="Int32" Nullable="false" />
-    <Property Name="COMPLEMENTO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="COMPLEMENTO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="COZINHEIRO" Relationship="Self.FK__CLIENTE_COZINHEIRO" FromRole="CLIENTE" ToRole="COZINHEIRO" />
     <NavigationProperty Name="COMSUMIDOR" Relationship="Self.FK_CLIENTE_COMSUMIDOR" FromRole="CLIENTE" ToRole="COMSUMIDOR" />
   </EntityType>
@@ -54,7 +54,7 @@
     </Key>
     <Property Name="COD_HAMBURGUER_INGREDIENTE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="COD_HAMBURGUER_FK" Type="Int32" Nullable="false" />
-    <Property Name="COD_INGREDIENTE_FK" Type="Int32" />
+    <Property Name="COD_INGREDIENTE_FK" Type="Int32" Nullable="false" />
     <Property Name="QUANTIDADE" Type="Int32" />
     <Property Name="PRECO_TOTAL_HAM_ING" Type="Double" />
     <NavigationProperty Name="HAMBURGUER" Relationship="Self.FK_HAMBURGUER_INGREDIENTE_HAMBURGUER" FromRole="HAMBURGUER_INGREDIENTE" ToRole="HAMBURGUER" />
@@ -178,7 +178,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_INGREDIENTE_HAMBURGUER_INGREDIENTE">
-    <End Role="INGREDIENTE" Type="Self.INGREDIENTE" Multiplicity="0..1" />
+    <End Role="INGREDIENTE" Type="Self.INGREDIENTE" Multiplicity="1" />
     <End Role="HAMBURGUER_INGREDIENTE" Type="Self.HAMBURGUER_INGREDIENTE" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="INGREDIENTE">

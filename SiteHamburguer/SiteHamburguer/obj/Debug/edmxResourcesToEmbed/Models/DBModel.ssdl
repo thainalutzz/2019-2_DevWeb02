@@ -13,7 +13,7 @@
     <Property Name="BAIRRO" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="RUA" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="NUMERO" Type="int" Nullable="false" />
-    <Property Name="COMPLEMENTO" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="COMPLEMENTO" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="COMSUMIDOR">
     <Key>
@@ -46,7 +46,7 @@
     </Key>
     <Property Name="COD_HAMBURGUER_INGREDIENTE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="COD_HAMBURGUER_FK" Type="int" Nullable="false" />
-    <Property Name="COD_INGREDIENTE_FK" Type="int" />
+    <Property Name="COD_INGREDIENTE_FK" Type="int" Nullable="false" />
     <Property Name="QUANTIDADE" Type="int" />
     <Property Name="PRECO_TOTAL_HAM_ING" Type="float" />
   </EntityType>
@@ -126,7 +126,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_INGREDIENTE_HAMBURGUER_INGREDIENTE">
-    <End Role="INGREDIENTE" Type="Self.INGREDIENTE" Multiplicity="0..1" />
+    <End Role="INGREDIENTE" Type="Self.INGREDIENTE" Multiplicity="1" />
     <End Role="HAMBURGUER_INGREDIENTE" Type="Self.HAMBURGUER_INGREDIENTE" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="INGREDIENTE">

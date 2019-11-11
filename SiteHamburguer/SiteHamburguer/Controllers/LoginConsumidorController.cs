@@ -43,7 +43,6 @@ namespace SiteHamburguer.Controllers
                         {
 
                             //senha certa
-                            //Session["clienteCOD"] = loginUsuario.COD_CLIENTE;
                             Session["clienteCOD"] = loginSenha.COD_CONSUMIDOR;
                             Session["clienteUsuario"] = loginUsuario.NOME;
                             return RedirectToAction("Index", "HomeConsumidor");

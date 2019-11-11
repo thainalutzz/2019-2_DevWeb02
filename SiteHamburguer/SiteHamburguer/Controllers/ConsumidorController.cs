@@ -74,41 +74,7 @@ namespace SiteHamburguer.Controllers
                 return View();
             }
         }
-        //public ActionResult CreateCon(COMSUMIDOR consumidor)
-        //{
-        //    try
-        //    {
-        //        using (DBModels db = new DBModels())
-        //        {
-        //            Int32 ultimoCliente = new Int32();
-        //            ultimoCliente = 0;
-
-        //            foreach (CLIENTE cliente in db.CLIENTE.ToList())
-        //            {
-        //                if (ultimoCliente == 0)
-        //                {
-        //                    ultimoCliente = cliente.COD_CLIENTE;
-        //                }
-        //                else
-        //                {
-        //                    if (ultimoCliente < cliente.COD_CLIENTE)
-        //                    {
-        //                        ultimoCliente = cliente.COD_CLIENTE;
-        //                    }
-        //                }
-        //            }
-        //            consumidor.COD_CLIENTE_FK = ultimoCliente;
-        //            db.COMSUMIDOR.Add(consumidor);
-        //            db.SaveChanges();
-        //        }
-        //        return RedirectToAction("Index");
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
-
+       
         // GET: Cliente/Edit/5
         public ActionResult Edit(int id)
         {
