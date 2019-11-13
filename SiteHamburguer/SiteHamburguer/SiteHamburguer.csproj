@@ -291,6 +291,8 @@
     <Content Include="Views\Pedido\Create.cshtml" />
     <Content Include="Views\RealizaPedido\CreateItemPedido.cshtml" />
     <Content Include="Views\RealizaPedido\Index.cshtml" />
+    <Content Include="Views\RealizaPedido\Edit.cshtml" />
+    <Content Include="Views\RealizaPedido\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

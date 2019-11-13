@@ -21,11 +21,10 @@ namespace SiteHamburguer.Controllers
                 int codPedido = (int)Session["pedidoCOD"];
                 return View(db.PEDIDO_HAMBURGUER.Where(x => x.COD_PEDIDO_FK == codPedido).ToList());
 
-                //colocar botoes excluir e edit de HAMBURGUER, ao clicar Pedido_Hamburguer.Cod_Hamburguer_FK
-                //colocar botao para criar um novo hamburguer criarhamburguer
+     
             }
         }
-        
+
         public ActionResult CreateItemPedido()
         {
             return View();
@@ -67,7 +66,7 @@ namespace SiteHamburguer.Controllers
 
                     db.PEDIDO_HAMBURGUER.Add(pedido_hamburguer);
                     db.SaveChanges();
-                                        
+
                     foreach (PEDIDO_HAMBURGUER itemPedidoHamburguer in db.PEDIDO_HAMBURGUER.ToList())
                     {
                         if (ultimoPedidoHamburguer == 0)
@@ -140,7 +139,7 @@ namespace SiteHamburguer.Controllers
                     //pedido.COD_PEDIDO = (int)Session["pedidoCOD"];
                     //pedido.COD_CONSUMIDOR_FK = (int)Session["clienteCOD"];
 
-                    if(pedido.PRECO_PEDIDO != null)
+                    if (pedido.PRECO_PEDIDO != null)
                     {
                         pedido.PRECO_PEDIDO += pedido_hamburguer.PRECO_TOTAL_PED_HAM;
                     }
@@ -161,7 +160,7 @@ namespace SiteHamburguer.Controllers
                 return View();
             }
         }
-        
+
         // GET: RealizaPedido/Details/5
         public ActionResult Details(int id)
         {
@@ -187,16 +186,25 @@ namespace SiteHamburguer.Controllers
         // GET: RealizaPedido/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            using (DBModels db = new DBModels())
+            {
+                return View(db.HAMBURGUER.Where(x => x.COD_HAMBURGUER == id).FirstOrDefault());
+
+
+            }
         }
 
         // POST: RealizaPedido/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, HAMBURGUER hamburguer)
         {
             try
             {
-                // TODO: Add update logic here
+                using (DBModels db = new DBModels())
+                {
+                    db.Entry(hamburguer).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
 
                 return RedirectToAction("Index");
             }
@@ -209,16 +217,36 @@ namespace SiteHamburguer.Controllers
         // GET: RealizaPedido/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            using (DBModels db = new DBModels())
+            {
+                return View(db.HAMBURGUER.Where(x => x.COD_HAMBURGUER == id).FirstOrDefault());
+            }
         }
 
         // POST: RealizaPedido/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, HAMBURGUER hamburguer)
         {
             try
             {
-                // TODO: Add delete logic here
+                using (DBModels db = new DBModels())
+                {
+                    hamburguer = db.HAMBURGUER.Where(x => x.COD_HAMBURGUER == id).FirstOrDefault();
+                    PEDIDO_HAMBURGUER pedido_hamburguer = db.PEDIDO_HAMBURGUER.Where(x => x.COD_HAMBURGUER_FK == id).FirstOrDefault();
+                    
+
+                    db.PEDIDO_HAMBURGUER.Remove(pedido_hamburguer);
+                    db.SaveChanges();
+                    for (int i = 0; i <= 5; i++)
+                    {
+                        HAMBURGUER_INGREDIENTE hamburguer_ingrediente = db.HAMBURGUER_INGREDIENTE.Where(x => x.COD_HAMBURGUER_FK == id).FirstOrDefault();
+                        db.HAMBURGUER_INGREDIENTE.Remove(hamburguer_ingrediente);
+                        db.SaveChanges();
+                    }
+
+                    db.HAMBURGUER.Remove(hamburguer);
+                    db.SaveChanges();
+                }
 
                 return RedirectToAction("Index");
             }
@@ -227,6 +255,6 @@ namespace SiteHamburguer.Controllers
                 return View();
             }
         }
-      
+
     }
 }

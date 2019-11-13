@@ -12,19 +12,19 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayName("")
+            @Html.DisplayName("COD_PEDIDO_HAMBURGUER")
         </th>
         <th>
-            @Html.DisplayName("")
+            @Html.DisplayName("COD_PEDIDO_FK")
         </th>
         <th>
-            @Html.DisplayName("")
+            @Html.DisplayName("COD_HAMBURGUER_FK")
         </th>
         <th>
-            @Html.DisplayName("")
+            @Html.DisplayName("QUANTIDADE_PED_HAM")
         </th>
         <th>
-            @Html.DisplayName("")
+            @Html.DisplayName("PRECO_TOTAL_PED_HAM")
         </th>
         <th></th>
     </tr>
@@ -47,9 +47,10 @@
             @Html.DisplayFor(modelItem => item.PRECO_TOTAL_PED_HAM)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            
+            @Html.ActionLink("Create New", "CreateItemPedido")
+            @Html.ActionLink("Edit", "Edit", new { id = item.COD_HAMBURGUER_FK }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.COD_HAMBURGUER_FK })
         </td>
     </tr>
 }
