@@ -16,6 +16,7 @@ namespace SiteHamburguer.Controllers
     {
         public ActionResult Index()
         {
+
             using (DBModels db = new DBModels())
             {
                 int codPedido = (int)Session["pedidoCOD"];
@@ -184,25 +185,48 @@ namespace SiteHamburguer.Controllers
         }
 
         // GET: RealizaPedido/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit()
         {
-            using (DBModels db = new DBModels())
-            {
-                return View(db.HAMBURGUER.Where(x => x.COD_HAMBURGUER == id).FirstOrDefault());
-
-
-            }
+            return View();
         }
 
         // POST: RealizaPedido/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, HAMBURGUER hamburguer)
+        public ActionResult Edit(int id, PedidoRadioButton pedidoRadioButton)
         {
             try
             {
+                
                 using (DBModels db = new DBModels())
                 {
-                    db.Entry(hamburguer).State = EntityState.Modified;
+
+
+                    double precoHamburguer = new double();
+                    precoHamburguer = 0;
+
+
+
+                    foreach (HAMBURGUER_INGREDIENTE itemHamburguer in pedidoRadioButton.HAMBURGUER_INGREDIENTE_LIST)
+                    {
+                        itemHamburguer.COD_HAMBURGUER_FK = id;
+
+                        INGREDIENTE ingrediente = new INGREDIENTE();
+                        ingrediente = db.INGREDIENTE.Where(x => x.COD_INGREDIENTE == itemHamburguer.COD_INGREDIENTE_FK).FirstOrDefault();
+
+                        itemHamburguer.QUANTIDADE = 1;
+                        itemHamburguer.PRECO_TOTAL_HAM_ING = itemHamburguer.QUANTIDADE * ingrediente.PRECO_INGREDIENTE;
+
+                        precoHamburguer += Convert.ToDouble(itemHamburguer.PRECO_TOTAL_HAM_ING);
+
+                    }
+
+                    pedidoRadioButton.HAMBURGUER_INGREDIENTE_LIST[0].COD_HAMBURGUER_INGREDIENTE = db.HAMBURGUER_INGREDIENTE.Where(x => x.COD_HAMBURGUER_FK == id).ToList()[0].COD_HAMBURGUER_INGREDIENTE;
+                    pedidoRadioButton.HAMBURGUER_INGREDIENTE_LIST[1].COD_HAMBURGUER_INGREDIENTE = db.HAMBURGUER_INGREDIENTE.Where(x => x.COD_HAMBURGUER_FK == id).ToList()[1].COD_HAMBURGUER_INGREDIENTE;
+                    pedidoRadioButton.HAMBURGUER_INGREDIENTE_LIST[2].COD_HAMBURGUER_INGREDIENTE = db.HAMBURGUER_INGREDIENTE.Where(x => x.COD_HAMBURGUER_FK == id).ToList()[2].COD_HAMBURGUER_INGREDIENTE;
+                    pedidoRadioButton.HAMBURGUER_INGREDIENTE_LIST[3].COD_HAMBURGUER_INGREDIENTE = db.HAMBURGUER_INGREDIENTE.Where(x => x.COD_HAMBURGUER_FK == id).ToList()[3].COD_HAMBURGUER_INGREDIENTE;
+                    pedidoRadioButton.HAMBURGUER_INGREDIENTE_LIST[4].COD_HAMBURGUER_INGREDIENTE = db.HAMBURGUER_INGREDIENTE.Where(x => x.COD_HAMBURGUER_FK == id).ToList()[4].COD_HAMBURGUER_INGREDIENTE;
+
+                    db.Entry(pedidoRadioButton).State = EntityState.Modified;
                     db.SaveChanges();
                 }
 

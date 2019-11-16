@@ -1,6 +1,5 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
 
     if (Session["clienteCOD"] == null)
     {
@@ -9,15 +8,53 @@
 
 }
 
-<h2>Index</h2>
+<style>
+    .center-block {
+        /*width: 200px;
+        height: 200px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-left: -80px;
+        margin-top: -80px;*/
+        text-align: center;
+    }
+
+    .Titulo1 {
+        font-size: 48px;
+    }
+
+    .Titulo2 {
+        font-size: 23px;
+    }
+
+    .a1 {
+        height: 47px;
+        min-height: 37px;
+        width: 142px;
+    }
+
+    .a2 {
+        height: 47px;
+        min-height: 37px;
+        width: 142px;
+    }
+
+    .buttons{
+        
+    }
+</style>
+
+
 <body>
-    <div>
-        <h1>DashBoard</h1>
-        <h3>Usuário: @Session["clienteUsuario"]</h3>
-        <a href="@Url.Action("logOut", "LoginConsumidor")">Logout</a>
-        <a href="@Url.Action("RealizarPedido", "LoginConsumidor")">Pedido</a>
+    <h3>Usuário: @Session["clienteUsuario"]</h3>
+    <div class="center-block">
+        <h1 class="Titulo1">Vamos começar?</h1>
+        <h2 class="Titulo2">Quer realizar algum pedido?</h2>
+        <div class="buttons">
+            <a class="a1" href="@Url.Action("logOut", "LoginConsumidor")">Logout</a>
+            <a class="a2" href="@Url.Action("RealizarPedido", "LoginConsumidor")">Pedido</a>
+        </div>
 
     </div>
 </body>
-
-

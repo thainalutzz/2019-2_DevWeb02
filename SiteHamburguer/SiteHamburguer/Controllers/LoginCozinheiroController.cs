@@ -16,6 +16,10 @@ namespace SiteHamburguer.Controllers
             return View();
         }
 
+      
+
+
+
         [HttpPost]
         public ActionResult Autorize(SiteHamburguer.Models.InfoLogin info)
         {
@@ -41,7 +45,7 @@ namespace SiteHamburguer.Controllers
                         {
 
                             //senha certa
-                            Session["clienteCOD"] = loginUsuario.COD_CLIENTE;
+                            Session["clienteCOD"] = loginSenha.COD_COZINHEIRO;
                             Session["clienteUsuario"] = loginUsuario.NOME;
                             return RedirectToAction("Index", "HomeCozinheiro");
                         }

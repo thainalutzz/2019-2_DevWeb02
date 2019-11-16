@@ -25,7 +25,7 @@ namespace SiteHamburguer.Models
         public Nullable<int> COD_COZINHEIRO_FK { get; set; }
         public Nullable<double> PRECO_PEDIDO { get; set; }
         public string STATUS { get; set; }
-    
+
         public virtual COMSUMIDOR COMSUMIDOR { get; set; }
         public virtual COZINHEIRO COZINHEIRO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

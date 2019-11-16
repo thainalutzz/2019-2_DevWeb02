@@ -79,6 +79,7 @@ namespace SiteHamburguer.Controllers
             PEDIDO pedido = new PEDIDO();
             {
                 pedido.COD_CONSUMIDOR_FK = clienteCOD;
+                pedido.STATUS = "Pendente";
             }
             db.PEDIDO.Add(pedido);
             db.SaveChanges();

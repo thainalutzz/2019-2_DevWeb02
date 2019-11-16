@@ -1,14 +1,32 @@
 ﻿@using SiteHamburguer.Models;
 @model SiteHamburguer.Models.InfoLogin
 
-<h2>Index</h2>
+<h2>Consumidor</h2>
 <style>
     #login-div {
+        text-align: center;
+        width: 200px;
+        height: 200px;
         position: absolute;
-        left: 40%;
-        top: 40%;
-        border: 1px solid #ccc;
-        padding: 10px 10px;
+        top: 50%;
+        left: 50%;
+        margin-left: -100px;
+        margin-top: -100px;
+    }
+
+    .cadastro {
+        text-align: center;
+        width: 200px;
+        height: 200px;
+        position: absolute;
+        top: 100%;
+        left: 70%;
+        margin-left: -100px;
+        margin-top: -100px;
+    }
+
+    .textoCadastro {
+        font-size: 18px;
     }
 
     .field-validation-error {
@@ -63,10 +81,21 @@
                         <input type="submit" name="name" value="Login" />
                         <input type="reset" name="name" value="Clear" />
                     </td>
+
                 </tr>
+
             </table>
+
         }
+
+        <div class="cadastro">
+            <h1 class="textoCadastro">Ainda nao possui um cadastro?</h1>
+            <a class="a1" href="@Url.Action("Create", "Consumidor")">Cadastrar</a>
+        </div>
     </div>
+    <a class="a1" href="@Url.Action("Index", "Home")">Voltar</a>
+
+
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script src="~/Scripts/jquery.validate.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

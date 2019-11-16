@@ -1,18 +1,18 @@
 ﻿@model SiteHamburguer.Models.PedidoRadioButton
 
 @{
-    ViewBag.Title = "CreateItemPedido";
+    ViewBag.Title = "Pedido";
 }
 
-<h2>CreateItemPedido</h2>
 
+    <h2>Escolha o pão e os ingredientes</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>PedidoRadioButton</h4>
+       
         <hr />
         @* PAES *@
         <div class="form-group">
@@ -102,7 +102,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Voltar", "Index","HomeConsumidor")
 </div>
 
 @section Scripts {

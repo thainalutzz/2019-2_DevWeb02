@@ -280,10 +280,8 @@
     <Content Include="Views\Pedido_Hamburguer\Create.cshtml" />
     <Content Include="Views\Pedido_Hamburguer\Edit.cshtml" />
     <Content Include="Views\Pedido_Hamburguer\Delete.cshtml" />
-    <Content Include="Views\HomeConsumidor\Index.cshtml" />
     <Content Include="Views\LoginConsumidor\Index.cshtml" />
     <Content Include="Views\LoginCozinheiro\Index.cshtml" />
-    <Content Include="Views\HomeCozinheiro\Index.cshtml" />
     <Content Include="Views\Cliente\Create.cshtml" />
     <Content Include="Views\Consumidor\Create.cshtml" />
     <Content Include="Views\Cozinheiro\Create.cshtml" />
@@ -291,8 +289,13 @@
     <Content Include="Views\Pedido\Create.cshtml" />
     <Content Include="Views\RealizaPedido\CreateItemPedido.cshtml" />
     <Content Include="Views\RealizaPedido\Index.cshtml" />
-    <Content Include="Views\RealizaPedido\Edit.cshtml" />
     <Content Include="Views\RealizaPedido\Delete.cshtml" />
+    <Content Include="Views\RealizaPedido\Edit.cshtml" />
+    <Content Include="Views\HomeConsumidor\Index.cshtml" />
+    <Content Include="Views\HomeCozinheiro\Index.cshtml" />
+    <Content Include="Views\HomeCozinheiro\Details.cshtml" />
+    <Content Include="Views\HomeCozinheiro\Final.cshtml" />
+    <Content Include="Views\HomeCozinheiro\PedidoAceito.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

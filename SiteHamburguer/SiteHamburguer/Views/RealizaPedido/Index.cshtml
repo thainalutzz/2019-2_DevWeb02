@@ -1,58 +1,36 @@
 ﻿@model IEnumerable<SiteHamburguer.Models.PEDIDO_HAMBURGUER>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Peido";
 }
 
-<h2>Index</h2>
+<h2>Pedido: </h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayName("COD_PEDIDO_HAMBURGUER")
+            @Html.DisplayName("HAMBURGUER(ES) :")
         </th>
-        <th>
-            @Html.DisplayName("COD_PEDIDO_FK")
-        </th>
-        <th>
-            @Html.DisplayName("COD_HAMBURGUER_FK")
-        </th>
-        <th>
-            @Html.DisplayName("QUANTIDADE_PED_HAM")
-        </th>
-        <th>
-            @Html.DisplayName("PRECO_TOTAL_PED_HAM")
-        </th>
-        <th></th>
     </tr>
+    @{int count = 1;}
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.COD_PEDIDO_HAMBURGUER)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.COD_PEDIDO_FK)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.COD_HAMBURGUER_FK)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.QUANTIDADE_PED_HAM)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PRECO_TOTAL_PED_HAM)
-        </td>
-        <td>
-            
-            @Html.ActionLink("Create New", "CreateItemPedido")
-            @Html.ActionLink("Edit", "Edit", new { id = item.COD_HAMBURGUER_FK }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.COD_HAMBURGUER_FK })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+
+        <tr>
+            <th>
+
+                @Html.DisplayName("HAMBURGUER " + count++)
+            </th>
+        </tr>
+        <tr>
+            <td>
+                @Html.ActionLink("Adicionar outro", "CreateItemPedido")|
+                @Html.ActionLink("Editar", "Edit", new { id = item.COD_HAMBURGUER_FK }) |
+                @Html.ActionLink("Deletar", "Delete", new { id = item.COD_HAMBURGUER_FK })
+            </td>
+        </tr>
+    }
 
 </table>
