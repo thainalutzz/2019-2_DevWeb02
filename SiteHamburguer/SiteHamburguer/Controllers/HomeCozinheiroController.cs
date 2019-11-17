@@ -31,6 +31,7 @@ namespace SiteHamburguer.Controllers
         public ActionResult Cancelar(int id , PEDIDO pedido)
         {
             try
+
             {
                 using (DBModels db = new DBModels())
                 {
@@ -43,7 +44,7 @@ namespace SiteHamburguer.Controllers
                     return RedirectToAction("Index", "HomeCozinheiro");
                 }
 
-            }
+            } 
             catch
             {
 

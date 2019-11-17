@@ -26,11 +26,22 @@
         </tr>
         <tr>
             <td>
-                @Html.ActionLink("Adicionar outro", "CreateItemPedido")|
+
                 @Html.ActionLink("Editar", "Edit", new { id = item.COD_HAMBURGUER_FK }) |
                 @Html.ActionLink("Deletar", "Delete", new { id = item.COD_HAMBURGUER_FK })
             </td>
         </tr>
+
+
     }
+    @Html.ActionLink("Confirmar", "Finalizar")
+    &nbsp|&nbsp
+    @Html.ActionLink("Adicionar outro", "CreateItemPedido")
 
 </table>
+
+<div>
+
+
+
+</div>

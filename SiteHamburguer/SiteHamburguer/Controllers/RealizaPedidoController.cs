@@ -162,6 +162,12 @@ namespace SiteHamburguer.Controllers
             }
         }
 
+        public ActionResult Finalizar()
+        {
+            return View();
+        }
+
+
         // GET: RealizaPedido/Details/5
         public ActionResult Details(int id)
         {

@@ -10,7 +10,7 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.COD_PEDIDO)
+            @Html.DisplayName("Numero do pedido")
         </dt>
 
         <dd>
@@ -18,15 +18,15 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.PRECO_PEDIDO)
+            @Html.DisplayName("Preço do pedido")
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PRECO_PEDIDO)
+           R$ @Html.DisplayFor(model => model.PRECO_PEDIDO)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.STATUS)
+            @Html.DisplayName("Status do pedido")
         </dt>
 
         <dd>
@@ -35,5 +35,6 @@
 
     </dl>
 </div>
-@Html.ActionLink("Cancelar", "Cancelar", new { id = Model.COD_PEDIDO })
 @Html.ActionLink("Concluir", "PedidoAceito", new { id = Model.COD_PEDIDO })
+@Html.ActionLink("Cancelar", "Cancelar", new { id = Model.COD_PEDIDO })
+

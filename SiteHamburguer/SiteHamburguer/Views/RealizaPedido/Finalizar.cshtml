@@ -1,0 +1,37 @@
+﻿@model SiteHamburguer.Models.HAMBURGUER
+
+@{
+    ViewBag.Title = "Finalizar";
+}
+<style>
+    .center-block{
+        text-align:center;
+    }
+        .Titulo1 {
+        font-size: 48px;
+    }
+
+    .Titulo2 {
+        font-size: 23px;
+    }
+
+    .a1 {
+        height: 47px;
+        min-height: 37px;
+        width: 142px;
+    }
+
+    .a2 {
+        height: 47px;
+        min-height: 37px;
+        width: 142px;
+    }
+</style>
+    <body>
+        <h3>Usuário: @Session["clienteUsuario"]</h3>
+        <div class="center-block">
+            <h1 class="Titulo1">Pedido Enviado!</h1>
+            <h2 class="Titulo2">Aguarde o cozinheiro confirmar o pedido!</h2>
+        </div>
+    </body>
+
