@@ -264,6 +264,11 @@ namespace SiteHamburguer.Controllers
                     hamburguer = db.HAMBURGUER.Where(x => x.COD_HAMBURGUER == id).FirstOrDefault();
                     PEDIDO_HAMBURGUER pedido_hamburguer = db.PEDIDO_HAMBURGUER.Where(x => x.COD_HAMBURGUER_FK == id).FirstOrDefault();
                     
+                    PEDIDO pedido = db.PEDIDO.Where(x => x.COD_PEDIDO == pedido_hamburguer.COD_PEDIDO_FK).FirstOrDefault();
+                    pedido.PRECO_PEDIDO -= hamburguer.PRECO_HAMBURGUER;
+
+                    db.Entry(pedido).State = EntityState.Modified;
+                    db.SaveChanges();
 
                     db.PEDIDO_HAMBURGUER.Remove(pedido_hamburguer);
                     db.SaveChanges();

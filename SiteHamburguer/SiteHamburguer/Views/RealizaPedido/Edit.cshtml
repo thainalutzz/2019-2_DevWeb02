@@ -19,12 +19,16 @@
     <div class="form-group">
         @Html.Label("Pão", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
+
             @Html.RadioButtonFor(model => model.HAMBURGUER_INGREDIENTE_LIST[0].COD_INGREDIENTE_FK, 4)
             <label for="radio-choice-v-2a">Gergelim</label>
+            
             @Html.RadioButtonFor(model => model.HAMBURGUER_INGREDIENTE_LIST[0].COD_INGREDIENTE_FK, 5)
             <label for="radio-choice-v-2a">Integral</label>
+
             @Html.RadioButtonFor(model => model.HAMBURGUER_INGREDIENTE_LIST[0].COD_INGREDIENTE_FK, 6)
             <label for="radio-choice-v-2a">Brioche</label>
+
             @Html.ValidationMessageFor(model => model.HAMBURGUER_INGREDIENTE_LIST[0].COD_INGREDIENTE_FK, "", new { @class = "text-danger" })
         </div>
     </div>
