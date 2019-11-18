@@ -22,7 +22,7 @@ namespace SiteHamburguer.Controllers
                 int codPedido = (int)Session["pedidoCOD"];
                 return View(db.PEDIDO_HAMBURGUER.Where(x => x.COD_PEDIDO_FK == codPedido).ToList());
 
-     
+
             }
         }
 
@@ -162,6 +162,26 @@ namespace SiteHamburguer.Controllers
             }
         }
 
+        public ActionResult DetalheHamburguer(int id)
+        {
+            List<INGREDIENTE> listaIngredientes = new List<INGREDIENTE>();
+
+            using (DBModels db = new DBModels())
+            {
+                foreach (HAMBURGUER_INGREDIENTE item in db.HAMBURGUER_INGREDIENTE.ToList().Where(x => x.COD_HAMBURGUER_FK == id))
+                {
+                    INGREDIENTE ingrediente = new INGREDIENTE();
+                    ingrediente = db.INGREDIENTE.Where(x => x.COD_INGREDIENTE == item.COD_INGREDIENTE_FK).FirstOrDefault();
+                    // ingrediente.COD_INGREDIENTE = item.COD_INGREDIENTE_FK;
+                    //ingrediente.DESCR_INGREDIENTE = db.INGREDIENTE.Where(x => x.COD_INGREDIENTE == item.COD_INGREDIENTE_FK).FirstOrDefault().DESCR_INGREDIENTE;
+                    listaIngredientes.Add(ingrediente);
+                }
+            }
+            return View(listaIngredientes);
+
+
+        }
+
         public ActionResult Finalizar()
         {
             return View();
@@ -202,7 +222,7 @@ namespace SiteHamburguer.Controllers
         {
             try
             {
-                
+
                 using (DBModels db = new DBModels())
                 {
 
@@ -263,7 +283,7 @@ namespace SiteHamburguer.Controllers
                 {
                     hamburguer = db.HAMBURGUER.Where(x => x.COD_HAMBURGUER == id).FirstOrDefault();
                     PEDIDO_HAMBURGUER pedido_hamburguer = db.PEDIDO_HAMBURGUER.Where(x => x.COD_HAMBURGUER_FK == id).FirstOrDefault();
-                    
+
                     PEDIDO pedido = db.PEDIDO.Where(x => x.COD_PEDIDO == pedido_hamburguer.COD_PEDIDO_FK).FirstOrDefault();
                     pedido.PRECO_PEDIDO -= hamburguer.PRECO_HAMBURGUER;
 

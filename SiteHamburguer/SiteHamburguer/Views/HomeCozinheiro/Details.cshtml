@@ -1,43 +1,53 @@
-﻿@model SiteHamburguer.Models.PEDIDO
+﻿@model IEnumerable<SiteHamburguer.Models.PEDIDO_HAMBURGUER>
 
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
 
-<div>
-    <h4>PEDIDO</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayName("Numero do pedido")
-        </dt>
+<h2>Pedidos</h2>
 
-        <dd>
-            @Html.DisplayFor(model => model.COD_PEDIDO)
-        </dd>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("HAMBURGUER(ES) :")
+        </th>
+    </tr>
+    @{int count = 1;}
+    @{double preco = 0;}
+</table>
+<table class="table">
+    @foreach (var item in Model)
+    {
 
-        <dt>
-            @Html.DisplayName("Preço do pedido")
-        </dt>
+        <tr>
+            <th>
+                @Html.DisplayName("HAMBURGUER " + count++)
+            </th>
+            <th>
+            </th>
+        </tr>
+        <tr>
+            <td>
+                R$ @Html.DisplayFor(modelItem => item.PRECO_TOTAL_PED_HAM)
+            </td>
+            <td>
+                @Html.ActionLink("Detalhe", "DetalheHamburguer", new { id = item.COD_HAMBURGUER_FK })
+            </td>
+        </tr>
+        preco += (double)item.PRECO_TOTAL_PED_HAM;
+    }
+</table>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Preço Total do Pedido: R$" + preco.ToString())
+        </th>
+    </tr>
+</table>
 
-        <dd>
-            R$ @Html.DisplayFor(model => model.PRECO_PEDIDO)
-        </dd>
-
-        <dt>
-            @Html.DisplayName("Status do pedido")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.STATUS)
-        </dd>
-
-    </dl>
-</div>
 <p>
-   
-    @Html.ActionLink("Aceitar", "Aceitar", new {  id = Model.COD_PEDIDO }) |
-    @Html.ActionLink("Voltar", "Index")
+
+    @Html.ActionLink("Concluir", "PedidoAceito", new { id = (int)Session["pedidoCOD"] })
+    @Html.ActionLink("Cancelar", "Cancelar", new { id = (int)Session["pedidoCOD"] })
 </p>

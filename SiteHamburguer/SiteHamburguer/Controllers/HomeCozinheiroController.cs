@@ -27,8 +27,8 @@ namespace SiteHamburguer.Controllers
             return View();
         }
 
-        
-        public ActionResult Cancelar(int id , PEDIDO pedido)
+
+        public ActionResult Cancelar(int id, PEDIDO pedido)
         {
             try
 
@@ -44,7 +44,7 @@ namespace SiteHamburguer.Controllers
                     return RedirectToAction("Index", "HomeCozinheiro");
                 }
 
-            } 
+            }
             catch
             {
 
@@ -54,12 +54,12 @@ namespace SiteHamburguer.Controllers
 
         public ActionResult PedidoAceito(int id)
         {
-            return PedidoAceito(id,new PEDIDO());
+            return PedidoAceito(id, new PEDIDO());
         }
 
 
         [HttpPost]
-        public ActionResult PedidoAceito(int id,PEDIDO pedido)
+        public ActionResult PedidoAceito(int id, PEDIDO pedido)
         {
             try
             {
@@ -70,7 +70,7 @@ namespace SiteHamburguer.Controllers
                     db.Entry(pedido).State = EntityState.Modified;
                     db.SaveChanges();
 
-                    return View("Final",pedido);
+                    return View("Final", pedido);
                 }
 
             }
@@ -87,7 +87,7 @@ namespace SiteHamburguer.Controllers
             {
                 using (DBModels db = new DBModels())
                 {
-            
+
                     pedido = db.PEDIDO.Where(x => x.COD_PEDIDO == id).FirstOrDefault();
                     pedido.STATUS = "Em Atendimento";
                     pedido.COD_COZINHEIRO_FK = (int)Session["clienteCOD"];
@@ -98,7 +98,7 @@ namespace SiteHamburguer.Controllers
 
                 }
 
-                return View("PedidoAceito", pedido);
+                return View("Details", pedido);
             }
             catch
             {
@@ -109,10 +109,38 @@ namespace SiteHamburguer.Controllers
         {
             using (DBModels db = new DBModels())
             {
-                return View(db.PEDIDO.Where(x => x.COD_PEDIDO == id).FirstOrDefault());
+                PEDIDO pedido = new PEDIDO();
+                pedido = db.PEDIDO.Where(x => x.COD_PEDIDO == id).FirstOrDefault();
+                pedido.STATUS = "Em Atendimento";
+                pedido.COD_COZINHEIRO_FK = (int)Session["clienteCOD"];
+
+                db.Entry(pedido).State = EntityState.Modified;
+                db.SaveChanges();
+
+                Session["pedidoCOD"] = id;
+                return View(db.PEDIDO_HAMBURGUER.ToList().Where(x => x.COD_PEDIDO_FK == id));
             }
         }
 
-      
+        public ActionResult DetalheHamburguer(int id)
+        {
+            List<INGREDIENTE> listaIngredientes = new List<INGREDIENTE>();
+
+            using (DBModels db = new DBModels())
+            {
+                foreach (HAMBURGUER_INGREDIENTE item in db.HAMBURGUER_INGREDIENTE.ToList().Where(x => x.COD_HAMBURGUER_FK == id))
+                {
+                    INGREDIENTE ingrediente = new INGREDIENTE();
+                    ingrediente = db.INGREDIENTE.Where(x => x.COD_INGREDIENTE == item.COD_INGREDIENTE_FK).FirstOrDefault();
+                    // ingrediente.COD_INGREDIENTE = item.COD_INGREDIENTE_FK;
+                    //ingrediente.DESCR_INGREDIENTE = db.INGREDIENTE.Where(x => x.COD_INGREDIENTE == item.COD_INGREDIENTE_FK).FirstOrDefault().DESCR_INGREDIENTE;
+                    listaIngredientes.Add(ingrediente);
+                }
+            }
+            
+            return View(listaIngredientes);
+
+
+        }
     }
 }

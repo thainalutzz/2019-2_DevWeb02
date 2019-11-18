@@ -26,7 +26,6 @@ namespace SiteHamburguer.Controllers
             using (DBModels db = new DBModels())
             {
                 var loginUsuario = db.CLIENTE.Where(x => x.NOME == info.CLIENTE.NOME).FirstOrDefault();
-                // var loginSenha = db.COMSUMIDOR.Where(x => x.SENHA_CON == info.COMSUMIDOR.SENHA_CON).FirstOrDefault();
                 if (loginUsuario == null)
                 {
                     info.LoginErroMessagem = "Usuário nao existe";

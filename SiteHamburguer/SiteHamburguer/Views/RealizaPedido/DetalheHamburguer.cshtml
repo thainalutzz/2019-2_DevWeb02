@@ -1,0 +1,34 @@
+﻿@model IEnumerable<SiteHamburguer.Models.INGREDIENTE>
+
+@{
+    ViewBag.Title = "DetalheHamburguer";
+}
+
+<h2>Detalhes do Hamburguer</h2>
+
+
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayName("Descrição")
+        </th>
+        <th>
+            @Html.DisplayName("Tipo")
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.DESCR_INGREDIENTE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TIPO_INGREDIENTE)
+            </td>
+        </tr>
+    }
+    @Html.ActionLink("Voltar", "Index")
+</table>

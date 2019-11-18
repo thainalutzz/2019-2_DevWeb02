@@ -41,8 +41,9 @@
                 R$ @Html.DisplayFor(modelItem => item.PRECO_TOTAL_PED_HAM)
             </td>
             <td>
-                @*@Html.ActionLink("Editar", "Edit", new { id = item.COD_HAMBURGUER_FK }) |*@
-                @Html.ActionLink("Deletar", "Delete", new { id = item.COD_HAMBURGUER_FK })
+            @Html.ActionLink("Detalhe", "DetalheHamburguer", new { id = item.COD_HAMBURGUER_FK })
+
+            @Html.ActionLink("Deletar", "Delete", new { id = item.COD_HAMBURGUER_FK })
             </td>
         </tr>
         preco += (double)item.PRECO_TOTAL_PED_HAM;

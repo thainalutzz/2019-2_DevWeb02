@@ -9,7 +9,12 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayName("Numero do pedido")
+            @Html.DisplayName("Número do Pedido")
+        </th>
+        <th>
+
+            @Html.DisplayName("Preço do Pedido")
+
         </th>
         <th>
             @Html.DisplayName("Status")
@@ -24,11 +29,15 @@
                 @Html.DisplayFor(modelItem => item.COD_PEDIDO)
             </td>
             <td>
+                R$ @Html.DisplayFor(modelItem => item.PRECO_PEDIDO)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.STATUS)
             </td>
 
             <td>
-                @Html.ActionLink("Detalhes", "Details", new { id = item.COD_PEDIDO })
+
+                @Html.ActionLink("Aceitar", "Details", new { id = item.COD_PEDIDO })
             </td>
         </tr>
     }
